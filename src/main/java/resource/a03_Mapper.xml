@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >	
+<mapper namespace="board.A03_Dao">
+
+<select id="selectBoardList" parameterType="board" resultType="board">
+	SELECT b1.*, b2.recount 
+	FROM board b1, (SELECT refno, COUNT(no) recount FROM board b2 GROUP BY refno) b2 
+	WHERE 
+	subject LIKE '%'||#{subject}||'%' and
+	writer LIKE '%'||#{writer}||'%' and
+	b1.refno=0 AND b2.refno(+)=b1.NO
+	order by b1.no
+	
+</select>
+
+<insert id="insertBoard" parameterType="board">
+    <selectKey resultType="int" keyProperty="no" order="BEFORE">
+        SELECT board_seq.nextval FROM dual
+    </selectKey>    
+insert into Board values(#{no},#{refno},#{subject},#{content},#{writer},#{readcnt},sysdate,null)
+</insert>
+
+<select id="selectBoard" parameterType="board" resultType="board">
+select * from board where no = #{no}
+</select>
+
+<update id="updateReadcnt" parameterType="board">
+update board set readcnt = readcnt+1 where no = #{no}
+</update>
+
+<select id="selectReplyList" parameterType="board" resultType="board">
+select * from board where refno = #{no}
+</select>
+
+<update id="updateBoard" parameterType="board" >
+UPDATE board SET subject = #{subject}, CONTENT = #{content}, uptdte=sysdate WHERE NO=#{no}
+</update>
+
+<delete id="deleteBoard" parameterType="board" >
+DELETE board WHERE NO=#{no}
+</delete>
+
+<insert id="insertFile" parameterType="boardFile">
+insert into boardFile values(file_seq.nextval,#{refno},#{filename})
+</insert>
+
+<select id="selectFile" parameterType="board" resultType="boardFile">
+select * from boardfile
+where refno = #{no}
+</select>
+
+</mapper>		
+		

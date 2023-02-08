@@ -1,0 +1,7 @@
+# 공통설정파일
+jdbc.driver=oracle.jdbc.driver.OracleDriver
+jdbc.url=jdbc:oracle:thin:@localhost:1521:xe
+jdbc.user=scott
+jdbc.pass=tiger
+user.upload=C:/workspace/A01space/board/src/main/webapp/B01_upload
+doc.path=C:/workspace/board/src/doc/
