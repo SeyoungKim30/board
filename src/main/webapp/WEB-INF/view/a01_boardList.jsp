@@ -34,17 +34,15 @@
 </head>
 
 <body>
-<div class="jumbotron text-center">
- <a href="${path }/selectBoardList.do"><h2>게시판</h2></a>
-</div>
 
 <div class="container">
 <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">글쓰기</button>
+ <a href="${path }/selectBoardList.do"><button class="btn btn-secondary">글목록</button></a>
 	<form id="frm01" class="form-inline" action="${path }/selectBoardList.do">
-  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	    <input class="form-control mr-sm-2" placeholder="writer" name="writer" value="${search.writer }"/>
-	    <input class="form-control mr-sm-2" placeholder="subject" name="subject" value="${search.subject }"/>
-	    <button class="btn btn-info" type="submit">검색</button>
+  	<nav class="navbar navbar-expand-sm bg-dark">
+	    <input class="form-control" placeholder="writer" name="writer" value="${search.writer }"/>
+	    <input class="form-control" placeholder="subject" name="subject" value="${search.subject }"/>
+	    <button class="btn btn-primary" type="submit">검색</button>
  	</nav>
 	</form>
    <table class="table table-hover table-striped">
@@ -55,7 +53,7 @@
    	<col width="10%">
     <thead>
     
-      <tr class="table-success text-center">
+      <tr class="table-primary text-center">
         <th>번호 no</th>
         <th>제목 subject</th>
         <th>작성자 writer</th>
@@ -66,11 +64,15 @@
     <tbody>
     <c:forEach items="${boardList}" var="each" >
     	<tr><td>${each.no}</td>
-    		<td><a href="${path }/selectBoard.do?no=${each.no}&writer=${search.writer }&subject=${search.subject }">${each.subject }</a>
+    		<td style="text-align:left;">
+	        	<c:forEach varStatus="ii" begin="2" end="${each.level }" >
+	    		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/></svg>
+				</c:forEach>
+    		<a href="${path }/selectBoard.do?no=${each.no}&writer=${search.writer }&subject=${search.subject }">${each.subject }</a>
     		<span class="badge text-bg-light">${each.recount }</span></td>
     		<td>${each.writer }</td><td>${each.regdte }</td><td>${each.readcnt }</td></tr>
     </c:forEach>
-    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+
     	<tr><td></td><td></td><td></td><td></td><td></td></tr>
     </tbody>
 	</table>    

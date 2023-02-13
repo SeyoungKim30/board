@@ -5,14 +5,15 @@
 <mapper namespace="board.A03_Dao">
 
 <select id="selectBoardList" parameterType="board" resultType="board">
-	SELECT b1.*, b2.recount 
+SELECT b1.*, level,b2.recount 
 	FROM board b1, (SELECT refno, COUNT(no) recount FROM board b2 GROUP BY refno) b2 
 	WHERE 
 	subject LIKE '%'||#{subject}||'%' and
 	writer LIKE '%'||#{writer}||'%' and
-	b1.refno=0 AND b2.refno(+)=b1.NO
-	order by b1.no
-	
+	b2.refno(+)=b1.NO
+	START WITH b1.refno=0
+    CONNECT BY PRIOR NO=b1.refno
+	order siblings by b1.no DESC
 </select>
 
 <insert id="insertBoard" parameterType="board">

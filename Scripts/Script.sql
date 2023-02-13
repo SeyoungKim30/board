@@ -39,9 +39,9 @@ update board set readcnt = readcnt+1 where no = 21;
 
 --답변수만 표시하는거
 SELECT b1.*, b2.recount FROM board b1, (SELECT refno, COUNT(no) recount FROM board b2 GROUP BY refno) b2 
-WHERE b1.refno=0 AND b2.refno(+)=b1.NO order by b1.no;
+WHERE b1.refno=0 AND b2.refno(+)=b1.NO order by b1.NO DESC ;
 
-UPDATE board SET CONTENT = '안녕햐ㅏㅎ세요', uptdte=sysdate WHERE NO=1;
+UPDATE board SET CONTENT = '안녕햐세요', uptdte=sysdate WHERE NO=1;
  SELECT board_seq.nextval FROM dual;
 
 CREATE TABLE boardfile (
@@ -57,3 +57,19 @@ create sequence file_seq
       increment by 1;
       
 SELECT * FROM boardfile;
+
+
+  select * from board
+    START WITH refno=0
+    CONNECT BY PRIOR NO=refno;
+    ;
+    
+   	SELECT b1.*,LEVEL , b2.recount 
+	FROM board b1, (SELECT refno, COUNT(no) recount FROM board b2 GROUP BY refno) b2 
+	WHERE 
+	subject LIKE '%'||''||'%' and
+	writer LIKE '%'||''||'%' and
+	b2.refno(+)=b1.NO
+	START WITH b1.refno=0
+    CONNECT BY PRIOR NO=b1.refno
+	order siblings by b1.no DESC;
