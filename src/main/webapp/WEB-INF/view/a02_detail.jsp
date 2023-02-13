@@ -25,7 +25,7 @@ ${board.content }
 </div>
 <div class="bg-secondary">
 <c:forEach items="${fileList }" var="ff">
-<a href="${path }/download.do?filename=${ff.filename }">${ff.filename }</a>
+<a href="${path }/download.do?filename=${ff.filename }">${ff.refno} ${ff.fileno} ${ff.filename }</a>
 </c:forEach>
 </div>
 	<div class="row">
@@ -83,6 +83,11 @@ $(".replybtn").click(function(){
 $('#updateBtn').click(function(){
 	$('.modal-body form').attr("action","${path}/updateBoard.do")
 	$('.modal-body h1').text("작성글 수정")
+	
+	<c:forEach items="${fileList }" var="ff">
+	$('.modal-body form').append("<br><input type='checkbox' name='fileno' value='${ff.fileno}'>삭제 ${ff.filename}")
+	</c:forEach>
+	
 	$('.modal-body [name=subject]').val('${board.subject }')
 	$('.modal-body [name=writer]').val('${board.writer }')
 	$('.modal-body [name=writer]').attr("readonly",true)

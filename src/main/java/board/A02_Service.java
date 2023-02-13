@@ -63,6 +63,21 @@ public class A02_Service {
 	}
 	
 	public void updateBoard(Board board) {
+		//파일첨부
+		if(board.getDoc()!=null) {
+		for(MultipartFile bf:board.getDoc()) {	
+			String filename=board.getNo()+"_"+bf.getOriginalFilename();
+			File fileobj = new File(path+filename);	
+			try {
+				bf.transferTo(fileobj);		//설정한 file객체 정보로 파일 생성
+				dao.insertFile(new BoardFile(0,board.getNo(),filename));	//각각 설정해서 불러옴
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}}
+		//파일첨부 끝
 		dao.updateBoard(board);
 	}
 	public void deleteBoard(Board board) {
