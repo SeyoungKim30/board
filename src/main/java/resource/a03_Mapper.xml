@@ -44,7 +44,7 @@ DELETE board WHERE NO=#{no}
 </delete>
 
 <insert id="insertFile" parameterType="boardFile">
-insert into boardFile values(file_seq.nextval,#{refno},#{filename})
+insert into boardFile values(file_seq.nextval,#{refno},#{filename},sysdate,sysdate)
 </insert>
 
 <select id="selectFile" parameterType="board" resultType="boardFile">
