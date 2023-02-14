@@ -73,3 +73,15 @@ SELECT * FROM boardfile;
 	START WITH b1.refno=0
     CONNECT BY PRIOR NO=b1.refno
 	order siblings by b1.no DESC;
+	
+select * from
+(SELECT b1.*, level,rownum rnum,b2.recount 
+	FROM board b1, (SELECT refno, COUNT(no) recount FROM board b2 GROUP BY refno) b2 
+	WHERE 
+	subject LIKE '%'||''||'%' and
+	writer LIKE '%'||''||'%' and
+	b2.refno(+)=b1.NO
+START WITH b1.refno=0
+CONNECT BY PRIOR NO=b1.refno
+order siblings by b1.no DESC) b
+where rnum between 1+(5*(1-1)) and (5*1);

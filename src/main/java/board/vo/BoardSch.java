@@ -1,8 +1,8 @@
 package board.vo;
 // board.vo.BoardSch
 public class BoardSch {
-	String search_writer;
-	String search_subject;
+	String searchWriter;
+	String searchSubject;
 	
 	int pageIndex;	//매번 페이지 파라미터로 받기
 	int totalPage;
@@ -27,17 +27,18 @@ public class BoardSch {
 	}
 	
 	
-	public String getSearch_writer() {
-		return search_writer;
+	
+	public String getSearchWriter() {
+		return searchWriter;
 	}
-	public void setSearch_writer(String search_writer) {
-		this.search_writer = search_writer;
+	public void setSearchWriter(String searchWriter) {
+		this.searchWriter = searchWriter;
 	}
-	public String getSearch_subject() {
-		return search_subject;
+	public String getSearchSubject() {
+		return searchSubject;
 	}
-	public void setSearch_subject(String search_subject) {
-		this.search_subject = search_subject;
+	public void setSearchSubject(String searchSubject) {
+		this.searchSubject = searchSubject;
 	}
 	public int getPageIndex() {
 		return pageIndex;

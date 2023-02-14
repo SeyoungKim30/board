@@ -9,8 +9,8 @@ select * from
 (SELECT b1.*, level,rownum rnum,b2.recount 
 	FROM board b1, (SELECT refno, COUNT(no) recount FROM board b2 GROUP BY refno) b2 
 	WHERE 
-	subject LIKE '%'||#{search_subject}||'%' and
-	writer LIKE '%'||#{search_writer}||'%' and
+	subject LIKE '%'||#{searchSubject, jdbcType=VARCHAR}||'%' and
+	writer LIKE '%'||#{searchWriter, jdbcType=VARCHAR}||'%' and
 	b2.refno(+)=b1.NO
 START WITH b1.refno=0
 CONNECT BY PRIOR NO=b1.refno
@@ -57,8 +57,8 @@ where refno = #{no}
 <select id="totalPage" parameterType="boardSch" resultType="int">
 SELECT CEIL(COUNT(*)/#{howmanyInonepage}) FROM BOARD b 
 	WHERE 
-	subject LIKE '%'||#{search_subject}||'%' and
-	writer LIKE '%'||#{search_writer}||'%' and
+	subject LIKE '%'||#{searchSubject, jdbcType=VARCHAR}||'%' and
+	writer LIKE '%'||#{searchWriter, jdbcType=VARCHAR}||'%'
 </select>
 </mapper>		
 		

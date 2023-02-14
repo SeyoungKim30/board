@@ -17,6 +17,7 @@
 <title>Insert title here</title>
 <style>
 	td{text-align:center;}
+	a:link{text-decoration: none;}
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" ></script>
@@ -38,10 +39,12 @@
 <div class="container">
 <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">글쓰기</button>
  <a href="${path }/selectBoardList.do"><button class="btn btn-secondary">글목록</button></a>
-	<form id="frm01" class="form-inline" action="${path }/selectBoardList.do">
+	<form id="selectBoardListform" class="form-inline" action="${path }/selectBoardList.do">
   	<nav class="navbar navbar-expand-sm bg-dark">
-	    <input class="form-control" placeholder="writer" name="search_writer" value="${search.search_writer }"/>
-	    <input class="form-control" placeholder="subject" name="search_subject" value="${search.search_subject }"/>
+	    <input class="form-control" placeholder="writer" name="searchWriter" value="${search.searchWriter }"/>
+	    <input class="form-control" placeholder="subject" name="searchSubject" value="${search.searchSubject }"/>
+	    <input name="pageIndex" placeholder="pageIndex" value="0">
+	    <input name="blockIndex" placeholder="blockIndex" value="0">
 	    <button class="btn btn-primary" type="submit">검색</button>
  	</nav>
 	</form>
@@ -68,7 +71,7 @@
 	        	<c:forEach varStatus="ii" begin="2" end="${each.level }" >
 	    		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/></svg>
 				</c:forEach>
-    		<a href="${path }/selectBoard.do?no=${each.no}&writer=${search.writer }&subject=${search.subject }">${each.subject }</a>
+    		<a href="${path }/selectBoard.do?no=${each.no}&searchWriter=${search.searchWriter }&searchSubject=${search.searchSubject }">${each.subject }</a>
     		<span class="badge text-bg-light">${each.recount }</span></td>
     		<td>${each.writer }</td><td>${each.regdte }</td><td>${each.readcnt }</td></tr>
     </c:forEach>
@@ -98,7 +101,23 @@
   </div>
 </div>
 
+지금 페이지 : ${search.pageIndex }
+페이지 블락 : ${search.blockIndex }
+howmanyInoneblock : ${search.howmanyInoneblock }
+
+<div>
+<c:forEach var="ii" begin="${(search.blockIndex-1) * search.howmanyInoneblock +1}" end="${search.blockIndex * search.howmanyInoneblock }">
+<a href="javascript:goPage(${ii});">${ii }</a>
+</c:forEach>
+</div>
+
 <script>
+function goPage(iindex){
+	$("[name=pageIndex]").val(iindex);
+	$("#selectBoardListform").submit();
+}
+
+
 $("#morefileBtn").click(function(){
 	$('.attachmentFile').append('<input type="file" name="doc" class="form-control">')
 })

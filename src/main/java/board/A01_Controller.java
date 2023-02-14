@@ -21,8 +21,6 @@ public class A01_Controller {
 	
 	@RequestMapping("/selectBoardList.do")
 	public String selectBoardList(@ModelAttribute("search") BoardSch search, Model d) {
-		System.out.println(search.getSearch_subject());
-		System.out.println(search.getSearch_writer());
 		System.out.println(search.getPageIndex());
 		System.out.println(search.getTotalPage());
 		System.out.println(search.getHowmanyInonepage());
