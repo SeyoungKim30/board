@@ -40,8 +40,8 @@
  <a href="${path }/selectBoardList.do"><button class="btn btn-secondary">글목록</button></a>
 	<form id="frm01" class="form-inline" action="${path }/selectBoardList.do">
   	<nav class="navbar navbar-expand-sm bg-dark">
-	    <input class="form-control" placeholder="writer" name="writer" value="${search.writer }"/>
-	    <input class="form-control" placeholder="subject" name="subject" value="${search.subject }"/>
+	    <input class="form-control" placeholder="writer" name="search_writer" value="${search.search_writer }"/>
+	    <input class="form-control" placeholder="subject" name="search_subject" value="${search.search_subject }"/>
 	    <button class="btn btn-primary" type="submit">검색</button>
  	</nav>
 	</form>

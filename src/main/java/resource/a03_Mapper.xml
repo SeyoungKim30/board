@@ -4,16 +4,18 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >	
 <mapper namespace="board.A03_Dao">
 
-<select id="selectBoardList" parameterType="board" resultType="board">
-SELECT b1.*, level,b2.recount 
+<select id="selectBoardList" parameterType="boardSch" resultType="board">
+select * from
+(SELECT b1.*, level,rownum rnum,b2.recount 
 	FROM board b1, (SELECT refno, COUNT(no) recount FROM board b2 GROUP BY refno) b2 
 	WHERE 
-	subject LIKE '%'||#{subject}||'%' and
-	writer LIKE '%'||#{writer}||'%' and
+	subject LIKE '%'||#{search_subject}||'%' and
+	writer LIKE '%'||#{search_writer}||'%' and
 	b2.refno(+)=b1.NO
-	START WITH b1.refno=0
-    CONNECT BY PRIOR NO=b1.refno
-	order siblings by b1.no DESC
+START WITH b1.refno=0
+CONNECT BY PRIOR NO=b1.refno
+order siblings by b1.no DESC) b
+where rnum between 1+(#{howmanyInonepage}*(#{pageIndex}-1)) and (#{howmanyInonepage}*#{pageIndex})
 </select>
 
 <insert id="insertBoard" parameterType="board">
@@ -52,5 +54,11 @@ select * from boardfile
 where refno = #{no}
 </select>
 
+<select id="totalPage" parameterType="boardSch" resultType="int">
+SELECT CEIL(COUNT(*)/#{howmanyInonepage}) FROM BOARD b 
+	WHERE 
+	subject LIKE '%'||#{search_subject}||'%' and
+	writer LIKE '%'||#{search_writer}||'%' and
+</select>
 </mapper>		
 		

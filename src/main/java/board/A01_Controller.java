@@ -8,10 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import board.vo.Board;
 import board.vo.BoardFile;
+import board.vo.BoardSch;
 
 @Controller
 public class A01_Controller {
@@ -20,7 +20,15 @@ public class A01_Controller {
 	A02_Service service;
 	
 	@RequestMapping("/selectBoardList.do")
-	public String selectBoardList(@ModelAttribute("search") Board search, Model d) {
+	public String selectBoardList(@ModelAttribute("search") BoardSch search, Model d) {
+		System.out.println(search.getSearch_subject());
+		System.out.println(search.getSearch_writer());
+		System.out.println(search.getPageIndex());
+		System.out.println(search.getTotalPage());
+		System.out.println(search.getHowmanyInonepage());
+		System.out.println(search.getBlockIndex());
+		System.out.println(search.getTotalBlock());
+		System.out.println(search.getHowmanyInoneblock());
 		d.addAttribute("boardList",service.selectBoardList(search));
 		return "a01_boardList";
 	}
@@ -32,9 +40,9 @@ public class A01_Controller {
 	}
 	
 	@RequestMapping("/selectBoard.do")
-	public String selectBoard(@ModelAttribute("search") Board search,Model d) {
+	public String selectBoard(@ModelAttribute("search") BoardSch search,Board board,Model d) {
 		d.addAttribute("boardList",service.selectBoardList(search));	//글쓴이랑 글 제목으로 검색
-		Board board = service.selectBoard(search);	//글 넘버로 검색
+		board = service.selectBoard(board);	//글 넘버로 검색
 		d.addAttribute("board",board);
 		d.addAttribute("replyList", service.selectReplyList(board));
 		List<BoardFile> fileList=service.selectFile(board);

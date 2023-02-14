@@ -5,6 +5,7 @@
 	<typeAliases>
 		<typeAlias alias="boardFile" type="board.vo.BoardFile"/>
 		<typeAlias alias="board" type="board.vo.Board"/>
+		<typeAlias alias="boardSch" type="board.vo.BoardSch"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="resource/a03_Mapper.xml"/>

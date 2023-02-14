@@ -15,6 +15,9 @@ public class Board {
     String uptdte ;
     int recount;
     List<MultipartFile> doc;
+    
+    int rnum;
+    int level;
 
 	public Board() {
 		super();
@@ -36,6 +39,26 @@ public class Board {
 		this.doc = doc;
 	}
 
+
+
+	public int getRnum() {
+		return rnum;
+	}
+
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+
+
+	public int getLevel() {
+		return level;
+	}
+
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
 
 
 	public List<MultipartFile> getDoc() {

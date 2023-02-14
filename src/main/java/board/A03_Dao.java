@@ -4,11 +4,12 @@ import java.util.List;
 
 import board.vo.Board;
 import board.vo.BoardFile;
+import board.vo.BoardSch;
 
 // board.A03_Dao
 public interface A03_Dao {
 
-	public List<Board> selectBoardList(Board search);
+	public List<Board> selectBoardList(BoardSch search);
 	public int insertBoard(Board board);
 	public Board selectBoard(Board board);
 	public void updateReadcnt(Board board);
@@ -19,4 +20,6 @@ public interface A03_Dao {
 	
 	public void insertFile(BoardFile bf);
 	public List<BoardFile> selectFile(Board board);
+	
+	public int totalPage(BoardSch search);
 }

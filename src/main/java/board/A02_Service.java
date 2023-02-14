@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import board.vo.Board;
 import board.vo.BoardFile;
+import board.vo.BoardSch;
 
 @Service
 public class A02_Service {
@@ -21,9 +22,23 @@ public class A02_Service {
 	@Value("${doc.path}")
 	String path;
 	
-	public List<Board> selectBoardList(Board search){
-		if(search.getSubject()==null) {search.setSubject("");}
-		if(search.getWriter()==null) {search.setWriter("");}
+	public List<Board> selectBoardList(BoardSch search){
+		//search 세팅 : 페이지관련
+		if(search.getHowmanyInonepage()==0) {search.setHowmanyInonepage(10);}
+		if(search.getHowmanyInoneblock()==0) {search.setHowmanyInoneblock(5);}
+		
+		if(search.getBlockIndex()==0&&search.getPageIndex()==0) {search.setPageIndex(1);	search.setBlockIndex(1);}	//위치정보 아무것도 없으면 1
+		if(search.getBlockIndex()==0&&search.getPageIndex()!=0) {
+			search.setBlockIndex((int) Math.ceil(search.getPageIndex()/search.getHowmanyInoneblock()));}	//블락= 올림(페이지수/블락당)
+		if(search.getBlockIndex()!=0&&search.getPageIndex()==0) {
+			search.setPageIndex(search.getHowmanyInoneblock()*(search.getBlockIndex()-1)+1);	//3블락이고 블락에 4개씩이면 10페이지= howmany*(블락-1)+1
+		}
+		search.setTotalPage(dao.totalPage(search));
+		search.setTotalBlock((int) Math.ceil(search.getTotalPage()/search.getHowmanyInoneblock()));	//올림(전체페이지(11) / 한블락당페이지(5)) = 블락 3개
+		//search 세팅 : 페이지관련 끝
+		if(search.getSearch_subject()==null) {search.setSearch_subject("");}
+		if(search.getSearch_writer()==null) {search.setSearch_writer("");}
+		
 		return dao.selectBoardList(search);
 	}
 	
@@ -83,4 +98,6 @@ public class A02_Service {
 	public void deleteBoard(Board board) {
 		dao.deleteBoard(board);
 	}
+	
+	
 }

@@ -13,7 +13,7 @@ public class Run01 {
 		A01_Controller obj = ctx.getBean("a01_Controller", A01_Controller.class);
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		Board brd= new Board();
-		System.out.println(obj.selectBoardList(brd, null));
+		//System.out.println(obj.selectBoardList(brd, null));
 		
 	
 	}
