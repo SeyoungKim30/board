@@ -23,11 +23,11 @@
 <div>
 ${board.content }
 </div>
-<div class="bg-secondary">
+<div class="bg-light"><ul>
 <c:forEach items="${fileList }" var="ff">
-<a href="${path }/download.do?filename=${ff.filename }">${ff.refno} ${ff.fileno} ${ff.filename }</a>
+<li><a href="${path }/download.do?filename=${ff.filename }">${ff.refno} ${ff.fileno} ${ff.filename }</a>
 </c:forEach>
-</div>
+</ul></div>
 	<div class="row">
 	<div class="col col-md-4 text-start"><button type="button" class="replybtn btn btn-primary">답변하기</button></div>
 	<div class="col col-md-4 ms-auto text-end">

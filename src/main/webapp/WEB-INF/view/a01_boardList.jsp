@@ -48,7 +48,7 @@
 	    <button class="btn btn-primary" type="submit">검색</button>
  	</nav>
 	</form>
-   <table class="table table-hover table-striped">
+   <table class="table table-hover">
    	<col width="10%">
    	<col width="50%">
    	<col width="15%">
@@ -105,11 +105,14 @@
 페이지 블락 : ${search.blockIndex }
 howmanyInoneblock : ${search.howmanyInoneblock }
 
-<div>
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
 <c:forEach var="ii" begin="${(search.blockIndex-1) * search.howmanyInoneblock +1}" end="${search.blockIndex * search.howmanyInoneblock }">
-<a href="javascript:goPage(${ii});">${ii }</a>
+  <li class="page-item"><a class="page-link" href="javascript:goPage(${ii});" >${ii }</a></li>
 </c:forEach>
-</div>
+  </ul>
+</nav>
+
 
 <script>
 function goPage(iindex){
