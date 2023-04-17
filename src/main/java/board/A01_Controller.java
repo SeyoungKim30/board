@@ -43,6 +43,7 @@ public class A01_Controller {
 		board = service.selectBoard(board);	//글 넘버로 검색
 		d.addAttribute("board",board);
 		d.addAttribute("replyList", service.selectReplyList(board));
+		//d.addAttribute("commentList",service.selectBoardComment(board));
 		List<BoardFile> fileList=service.selectFile(board);
 		if(fileList!=null) {
 			d.addAttribute("fileList",fileList);
