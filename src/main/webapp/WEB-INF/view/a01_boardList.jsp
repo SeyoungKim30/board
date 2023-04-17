@@ -71,12 +71,11 @@
 	        	<c:forEach varStatus="ii" begin="2" end="${each.level }" >
 	    		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/></svg>
 				</c:forEach>
-    		<a href="${path }/selectBoard.do?no=${each.no}&searchWriter=${search.searchWriter }&searchSubject=${search.searchSubject }">${each.subject }</a>
+    		<a href="${path }/selectBoard.do?no=${each.no}&searchWriter=${search.searchWriter }&searchSubject=${search.searchSubject }&pageIndex=${search.pageIndex}">${each.subject }</a>
     		<span class="badge text-bg-light">${each.recount }</span></td>
     		<td>${each.writer }</td><td>${each.regdte }</td><td>${each.readcnt }</td></tr>
     </c:forEach>
 
-    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
     </tbody>
 	</table>    
     
@@ -104,17 +103,36 @@
 지금 페이지 : ${search.pageIndex }
 페이지 블락 : ${search.blockIndex }
 howmanyInoneblock : ${search.howmanyInoneblock }
+totalPage : ${search.totalPage }
 
-<nav aria-label="Page navigation example">
+
+<nav aria-label="Page navigation">
   <ul class="pagination">
-<c:forEach var="ii" begin="${(search.blockIndex-1) * search.howmanyInoneblock +1}" end="${search.blockIndex * search.howmanyInoneblock }">
-  <li class="page-item"><a class="page-link" href="javascript:goPage(${ii});" >${ii }</a></li>
-</c:forEach>
+
   </ul>
 </nav>
 
-
 <script>
+var pageIndex=${search.pageIndex }
+var blockIndex=${search.blockIndex }
+var howmanyInoneblock= ${search.howmanyInoneblock }
+var totalPage = ${search.totalPage }
+var pageRangeEach= Math.floor(howmanyInoneblock/2)
+var pagination=document.querySelector('.pagination');
+var pagenationhtmls="";
+
+for(var i=pageIndex-pageRangeEach;i<=pageIndex+pageRangeEach;i++){
+	if(i>0 && i<=totalPage){
+		if(i==pageIndex){
+			pagenationhtmls+=`<li class="page-item"><a class="page-link active" href="javascript:goPage(`+i+`);" >`+i+`</a></li>`
+		}else{
+			pagenationhtmls+=`<li class="page-item"><a class="page-link" href="javascript:goPage(`+i+`);" >`+i+`</a></li>`
+		}
+		console.log('실행')
+	}
+}
+pagination.innerHTML = pagenationhtmls
+
 function goPage(iindex){
 	$("[name=pageIndex]").val(iindex);
 	$("#selectBoardListform").submit();
