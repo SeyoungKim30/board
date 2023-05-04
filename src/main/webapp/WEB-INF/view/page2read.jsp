@@ -18,12 +18,26 @@
 </head>
 <body>
 <%@include file="/WEB-INF/view/header.jsp" %>
+
 <main class="container-xxl bd-gutter mt-3 my-md-4 bd-layout">
 
-<%@include file="/WEB-INF/view/list.jsp" %>
+<h3>${board.subject }</h3>
+<div>작성자 ${board.writer } / 작성일 ${board.regdte } / 조회수 ${board.readcnt } / 글번호 ${board.no }</div>
+<div>
+${board.content }
+</div>
+<ul>
+<li>연관게시글 1
+<li>연관게시글 2
+<li>연관게시글 3
+</ul>
 
+
+<%@include file="/WEB-INF/view/list.jsp" %>
 </main>
+
+
 <%@include file="/WEB-INF/view/footer.jsp" %>
 </body>
-<
+
 </html>

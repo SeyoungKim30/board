@@ -32,10 +32,7 @@ public class A01_Controller {
 		d.addAttribute("boardList",service.selectBoardList(search));	//글쓴이랑 글 제목으로 검색
 		board = service.selectBoard(board);	//글 넘버로 검색
 		d.addAttribute("board",board);
-		d.addAttribute("replyList", service.selectReplyList(board));
-		//d.addAttribute("commentList",service.selectBoardComment(board));
-	
-		return "a02_detail";		//search, board, boardlist, replyList 전달
+		return "page2read";	
 	}
 	
 	@RequestMapping("/updateBoard.do")

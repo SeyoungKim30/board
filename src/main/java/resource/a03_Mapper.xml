@@ -25,17 +25,6 @@ insert into Board values(#{no},#{refno},#{subject},#{content},#{writer},#{readcn
 select * from board where no = #{no}
 </select>
 
-<update id="updateReadcnt" parameterType="board">
-update board set readcnt = readcnt+1 where no = #{no}
-</update>
-
-<select id="selectReplyList" parameterType="board" resultType="board">
-select * from board b, (select * from board b2 where no=#{no}) sb
-where b.refno = #{no}
-or b.no = sb.refno
-order by b.no
-</select>
-
 <update id="updateBoard" parameterType="board" >
 UPDATE board SET subject = #{subject}, CONTENT = #{content}, uptdte=sysdate WHERE NO=#{no}
 </update>
