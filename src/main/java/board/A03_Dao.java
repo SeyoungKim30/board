@@ -17,9 +17,7 @@ public interface A03_Dao {
 	
 	public void updateBoard(Board board);
 	public void deleteBoard(Board board);
-	
-	public void insertFile(BoardFile bf);
-	public List<BoardFile> selectFile(Board board);
+
 	
 	public int totalPage(BoardSch search);
 }

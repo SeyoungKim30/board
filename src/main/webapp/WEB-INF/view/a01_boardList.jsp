@@ -89,7 +89,7 @@
 			<input name="subject" class="form-control" placeholder="subject" required>
 			<input name="writer" class="form-control" placeholder="writer" required>
 			<input name="no" class="form-control" placeholder="no" type="hidden" value="0">
-			<input name="refno" class="form-control" placeholder="refno" type="hidden" value="0">
+		
 			<textarea name="content" rows="" cols="" class="form-control" required></textarea>
 			<p class="attachmentFile"></p>
 			<button type="button" class="btn" id="morefileBtn">파일추가</button>

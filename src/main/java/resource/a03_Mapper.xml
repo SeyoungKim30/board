@@ -5,15 +5,13 @@
 <mapper namespace="board.A03_Dao">
 
 <select id="selectBoardList" parameterType="boardSch" resultType="board">
-select * from
-(SELECT b1.*,rownum rnum,b2.recount 
-	FROM board b1, (SELECT refno, COUNT(id) recount FROM BOARDCOMMENT GROUP BY refno) b2 
+select b.*, rn from 
+	(select b2.* , rownum rn from board b2
 	WHERE 
-	subject LIKE '%'||#{searchSubject, jdbcType=VARCHAR}||'%' and
-	writer LIKE '%'||#{searchWriter, jdbcType=VARCHAR}||'%' and
-	b2.refno(+)=b1.NO
-order by b1.no DESC) b
-where rnum between 1+(#{howmanyInonepage}*(#{pageIndex}-1)) and (#{howmanyInonepage}*#{pageIndex})
+	subject LIKE '%'||#{searchSubject, jdbcType=VARCHAR}||'%'
+	) b
+	where rn between 1+(30*(#{pageIndex}-1)) and (30*#{pageIndex})
+order by regdte DESC
 </select>
 
 <insert id="insertBoard" parameterType="board">
@@ -46,17 +44,8 @@ UPDATE board SET subject = #{subject}, CONTENT = #{content}, uptdte=sysdate WHER
 DELETE board WHERE NO=#{no}
 </delete>
 
-<insert id="insertFile" parameterType="boardFile">
-insert into boardFile values(file_seq.nextval,#{refno},#{filename},sysdate,sysdate)
-</insert>
-
-<select id="selectFile" parameterType="board" resultType="boardFile">
-select * from boardfile
-where refno = #{no}
-</select>
-
 <select id="totalPage" parameterType="boardSch" resultType="int">
-SELECT CEIL(COUNT(*)/#{howmanyInonepage}) FROM BOARD b 
+SELECT CEIL(COUNT(*)/30) FROM BOARD b 
 	WHERE 
 	subject LIKE '%'||#{searchSubject, jdbcType=VARCHAR}||'%' and
 	writer LIKE '%'||#{searchWriter, jdbcType=VARCHAR}||'%'

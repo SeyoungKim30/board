@@ -1,16 +1,12 @@
 package board;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import board.vo.Board;
-import board.vo.BoardFile;
 import board.vo.BoardSch;
 
 @Controller
@@ -21,14 +17,8 @@ public class A01_Controller {
 	
 	@RequestMapping("/selectBoardList.do")
 	public String selectBoardList(@ModelAttribute("search") BoardSch search, Model d) {
-		System.out.println(search.getPageIndex());
-		System.out.println(search.getTotalPage());
-		System.out.println(search.getHowmanyInonepage());
-		System.out.println(search.getBlockIndex());
-		System.out.println(search.getTotalBlock());
-		System.out.println(search.getHowmanyInoneblock());
 		d.addAttribute("boardList",service.selectBoardList(search));
-		return "a01_boardList";
+		return "page01boardlist";
 	}
 	
 	@RequestMapping("/insertBoard.do")
@@ -44,11 +34,8 @@ public class A01_Controller {
 		d.addAttribute("board",board);
 		d.addAttribute("replyList", service.selectReplyList(board));
 		//d.addAttribute("commentList",service.selectBoardComment(board));
-		List<BoardFile> fileList=service.selectFile(board);
-		if(fileList!=null) {
-			d.addAttribute("fileList",fileList);
-		}
-		return "a02_detail";		//search, board, boardlist, replyList, fileList 전달
+	
+		return "a02_detail";		//search, board, boardlist, replyList 전달
 	}
 	
 	@RequestMapping("/updateBoard.do")
@@ -63,9 +50,4 @@ public class A01_Controller {
 		return "redirect:/selectBoardList.do";
 	}
 	
-	@RequestMapping("/download.do")
-	public String download(@RequestParam("filename") String filename,Model d) {
-		d.addAttribute("downloadFileName", filename);
-		return "downloadViewer";
-	}
 }

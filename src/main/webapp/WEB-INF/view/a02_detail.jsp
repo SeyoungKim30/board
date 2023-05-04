@@ -24,9 +24,7 @@
 ${board.content }
 </div>
 <div class="bg-light"><ul>
-<c:forEach items="${fileList }" var="ff">
-<li><a href="${path }/download.do?filename=${ff.filename }">${ff.refno} ${ff.fileno} ${ff.filename }</a>
-</c:forEach>
+
 </ul></div>
 	<div class="row">
 	<div class="col col-md-4 text-start"><button type="button" class="replybtn btn btn-primary">답변하기</button></div>
@@ -39,9 +37,7 @@ ${board.content }
 			<form action="${path }/insertBoard.do">
 			<input name="subject" class="form-control" placeholder="subject" value="re:${board.subject }">
 			<input name="writer" class="form-control" placeholder="writer">
-			<input name="refno" class="form-control" placeholder="refno" type="hidden" value="${board.no }">
 			<textarea name="content" rows="" cols="" class="form-control"></textarea>
-			<input type="file" class="form-control">
 			<button class="btn btn-primary">등록</button>
 			</form>
 </div>
@@ -87,15 +83,10 @@ $('#updateBtn').click(function(){
 	$('.modal-body form').attr("action","${path}/updateBoard.do")
 	$('.modal-body h1').text("작성글 수정")
 	
-	<c:forEach items="${fileList }" var="ff">
-	$('.modal-body form').append("<br><input type='checkbox' name='fileno' value='${ff.fileno}'>삭제 ${ff.filename}")
-	</c:forEach>
-	
 	$('.modal-body [name=subject]').val('${board.subject }')
 	$('.modal-body [name=writer]').val('${board.writer }')
 	$('.modal-body [name=writer]').attr("readonly",true)
 	$('.modal-body [name=no]').val("${board.no }")
-	$('.modal-body [name=refno]').val("${board.refno }")
 	$('.modal-body [name=content]').val("${board.content }")
 	$('.modal-body [type=submit]').text('수정하기')
 })

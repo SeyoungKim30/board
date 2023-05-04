@@ -24,8 +24,8 @@ public class A02_Service {
 	
 	public List<Board> selectBoardList(BoardSch search){
 		//search 세팅 : 페이지관련
-		if(search.getHowmanyInonepage()==0) {search.setHowmanyInonepage(10);}
-		if(search.getHowmanyInoneblock()==0) {search.setHowmanyInoneblock(5);}
+		search.setHowmanyInonepage(30);
+		search.setHowmanyInoneblock(5);
 		
 		if(search.getBlockIndex()==0&&search.getPageIndex()==0) {search.setPageIndex(1);}	//위치정보 아무것도 없으면 1
 		if(search.getBlockIndex()==0) {
@@ -46,22 +46,6 @@ public class A02_Service {
 	
 	public Board insertBoard(Board board) {
 		dao.insertBoard(board);
-		//파일첨부
-		if(board.getDoc()!=null) {
-		for(MultipartFile bf:board.getDoc()) {	
-			String filename=board.getNo()+"_"+bf.getOriginalFilename();
-			File fileobj = new File(path+filename);	
-			try {
-				bf.transferTo(fileobj);		//설정한 file객체 정보로 파일 생성
-				dao.insertFile(new BoardFile(0,board.getNo(),filename));	//각각 설정해서 불러옴
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}}
-		//파일첨부 끝
-		
 		return board;
 	}
 	
@@ -74,27 +58,8 @@ public class A02_Service {
 	public List<Board> selectReplyList(Board search){
 		return dao.selectReplyList(search);
 	}
-	
-	public List<BoardFile> selectFile(Board board){
-		return dao.selectFile(board);
-	}
-	
+
 	public void updateBoard(Board board) {
-		//파일첨부
-		if(board.getDoc()!=null) {
-		for(MultipartFile bf:board.getDoc()) {	
-			String filename=board.getNo()+"_"+bf.getOriginalFilename();
-			File fileobj = new File(path+filename);	
-			try {
-				bf.transferTo(fileobj);		//설정한 file객체 정보로 파일 생성
-				dao.insertFile(new BoardFile(0,board.getNo(),filename));	//각각 설정해서 불러옴
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}}
-		//파일첨부 끝
 		dao.updateBoard(board);
 	}
 	public void deleteBoard(Board board) {
