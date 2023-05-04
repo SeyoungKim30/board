@@ -1,7 +1,7 @@
 DROP TABLE board;
 
 create table board(
-      no number primary key,
+      num number primary key,
       refno number,
       subject varchar2(200),
       content varchar2(2000),
@@ -10,6 +10,21 @@ create table board(
       regdte date,
       uptdte date
    );
+
+CREATE TABLE boardComment (
+  id NUMBER PRIMARY KEY,
+  refno NUMBER,
+  writer varchar2(200),
+  COMMENTS varchar2(1000),
+  writedate date
+  );
+
+create sequence comment_seq
+      start with 1
+      minvalue 1
+      maxvalue 999999
+      increment by 1;
+ 
 DROP sequence board_seq;
 
 create sequence board_seq
@@ -20,7 +35,7 @@ create sequence board_seq
 
      --sample 데이터 등록
 insert into board values(1,0,'첫번째글','내용','홍길동',0, sysdate, sysdate);    
-insert into board values(board_seq.nextval,0,'낭영나헷요','내용','박박',0, sysdate, sysdate);    
+insert into board values(board_seq.nextval,0,'test용 더미입력','내용','박박',0, sysdate, sysdate);    
 insert into board values(board_seq.nextval,0,'ㅎㅇㅇ','내용','김김',0, sysdate, sysdate);    
 
   select * 
@@ -85,3 +100,6 @@ START WITH b1.refno=0
 CONNECT BY PRIOR NO=b1.refno
 order siblings by b1.no DESC) b
 where rnum between 1+(5*(1-1)) and (5*1);
+
+SELECT * FROM BOARDCOMMENT;
+INSERT INTO BOARDCOMMENT VALUES (comment_seq.nextval,1,'김박박','우와 첫댓글',sysdate);

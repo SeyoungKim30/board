@@ -48,6 +48,8 @@ ${board.content }
 
 
 <c:if test="${not empty replyList }">
+<hr>
+<h4>연결된 글</h4>
 	<div class="accordion" id="accordionExample">
 	<c:forEach items="${replyList }" var="reply">
 	  <div class="accordion-item">
@@ -59,7 +61,8 @@ ${board.content }
 	    <div id="collapse${reply.no }" class="accordion-collapse collapse" aria-labelledby="heading${reply.no }" data-bs-parent="#accordionExample">
 	      <div class="accordion-body">
 				<div>작성자 ${reply.writer } / 작성일 ${reply.regdte } / 조회수 ${reply.readcnt } / 글번호 ${reply.no }</div>
-				<div>${reply.content }<button type="button" onclick="location.href='${path }/selectBoard.do?no='+${reply.no }">자세히 보기</button></div>
+				<div>${reply.content }</div>
+				<button type="button" onclick="location.href='${path }/selectBoard.do?no='+${reply.no }" class="btn btn-light btn-sm">자세히 보기</button>
 	      </div>
 	    </div>
 	  </div>

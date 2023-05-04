@@ -6,15 +6,13 @@
 
 <select id="selectBoardList" parameterType="boardSch" resultType="board">
 select * from
-(SELECT b1.*, level,rownum rnum,b2.recount 
-	FROM board b1, (SELECT refno, COUNT(no) recount FROM board b2 GROUP BY refno) b2 
+(SELECT b1.*,rownum rnum,b2.recount 
+	FROM board b1, (SELECT refno, COUNT(id) recount FROM BOARDCOMMENT GROUP BY refno) b2 
 	WHERE 
 	subject LIKE '%'||#{searchSubject, jdbcType=VARCHAR}||'%' and
 	writer LIKE '%'||#{searchWriter, jdbcType=VARCHAR}||'%' and
 	b2.refno(+)=b1.NO
-START WITH b1.refno=0
-CONNECT BY PRIOR NO=b1.refno
-order siblings by b1.no DESC) b
+order by b1.no DESC) b
 where rnum between 1+(#{howmanyInonepage}*(#{pageIndex}-1)) and (#{howmanyInonepage}*#{pageIndex})
 </select>
 
@@ -34,7 +32,10 @@ update board set readcnt = readcnt+1 where no = #{no}
 </update>
 
 <select id="selectReplyList" parameterType="board" resultType="board">
-select * from board where refno = #{no}
+select * from board b, (select * from board b2 where no=#{no}) sb
+where b.refno = #{no}
+or b.no = sb.refno
+order by b.no
 </select>
 
 <update id="updateBoard" parameterType="board" >
