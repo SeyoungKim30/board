@@ -52,8 +52,6 @@
   </div>
 </div>
 
-
-
 <script>
 var pageIndex=${search.pageIndex }
 var howmanyInoneblock= 5
@@ -69,7 +67,6 @@ for(var i=pageIndex-pageRangeEach;i<=pageIndex+pageRangeEach;i++){
 		}else{
 			pagenationhtmls+=`<li class="page-item"><a class="page-link" href="javascript:goPage(`+i+`);" >`+i+`</a></li>`
 		}
-		console.log('실행')
 	}
 }
 pagination.innerHTML = pagenationhtmls
