@@ -3,8 +3,10 @@ package board;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import board.vo.Board;
 import board.vo.BoardSch;
@@ -46,6 +48,13 @@ public class A01_Controller {
 	public String deleteBoard(Board board) {
 		service.deleteBoard(board);
 		return "redirect:/selectBoardList.do";
+	}
+	
+	@CrossOrigin(origins = "*",allowedHeaders = "*")
+	@RequestMapping("/selectRelative.do")
+	public String selectRelative(int postid,Model d) {
+		d.addAttribute("relativePosts",service.selectRelative(postid));
+		return "pageJsonReport";
 	}
 
 	

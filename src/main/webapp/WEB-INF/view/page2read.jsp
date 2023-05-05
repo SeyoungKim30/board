@@ -14,6 +14,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 
 </head>
 <body>
@@ -27,10 +28,7 @@
 ${board.content }
 </div>
 <h4>연관게시글</h4>
-<ul>
-<li>연관게시글 1
-<li>연관게시글 2
-<li>연관게시글 3
+<ul id="relativePostlist">
 </ul>
 
 
@@ -39,6 +37,21 @@ ${board.content }
 
 
 <%@include file="/WEB-INF/view/footer.jsp" %>
+
+<script>
+const relativePostlist = document.querySelector('#relativePostlist')
+
+fetch("${path}/selectRelative.do?postid=${board.postid }").then(response=>response.json())
+.then(json=>{
+	const postsArr= json.relativePosts;
+	let newlists='';
+	postsArr.forEach(function(each){
+		newlists+='<li><a href="${path}/selectBoard.do?postid='+each.postid+'">'+each.subject+'</a></li>'
+	})
+	relativePostlist.innerHTML = newlists;
+}).catch(error=>{console.error(error)})
+</script>
 </body>
+
 
 </html>

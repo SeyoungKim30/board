@@ -48,5 +48,23 @@ SELECT CEIL(COUNT(*)/30) FROM BOARD b
   SELECT * FROM dual
 </insert>
 
+<select id="selectRelative" parameterType="java.lang.Integer" resultType="board">
+SELECT b.postid, b.SUBJECT, b.REGDTE 
+FROM BOARD b , (SELECT POSTID, COUNt(voca) countvoca
+						FROM boardVoca
+						WHERE voca IN (
+							SELECT voca
+							FROM 
+								(SELECT voca, COUNT(postid) countpost FROM boardVoca 
+								WHERE VOCA IN (SELECT voca FROM boardVoca WHERE POSTID=#{postid}) 
+								GROUP BY voca) sub1
+							WHERE countpost/(SELECT COUNT(DISTINCT postID) FROM boardVoca) <![CDATA[ < ]]> =0.4
+								AND countpost>1
+							)
+						GROUP BY POSTID ) sub3
+WHERE b.POSTID = sub3.postid and b.postid!=#{postid}
+ORDER BY COUNTVOCA desc
+</select>
+
 </mapper>		
 		

@@ -19,4 +19,5 @@ public interface A03_Dao {
 	public int totalPage(BoardSch search);
 	
 	public int insertVoca(Voca voca);
+	public List<Board> selectRelative(int postid);
 }

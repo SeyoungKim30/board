@@ -53,6 +53,9 @@ public class A02_Service {
 	public void deleteBoard(Board board) {
 		dao.deleteBoard(board);
 	}
-
+	
+	public List<Board> selectRelative(int postid) {
+		return dao.selectRelative(postid);
+	}
 	
 }
