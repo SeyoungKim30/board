@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import board.vo.Board;
 import board.vo.BoardSch;
+import board.vo.Voca;
 
 @Controller
 public class A01_Controller {
@@ -23,8 +24,8 @@ public class A01_Controller {
 	
 	@RequestMapping("/insertBoard.do")
 	public String insertBoard(Board board,Model d) {
-		int boardNo=service.insertBoard(board).getPostid();
-		return "redirect:/selectBoard.do?no="+boardNo;
+		int postid=service.insertBoard(board).getPostid();
+		return "redirect:/selectBoard.do?postid="+postid;
 	}
 	
 	@RequestMapping("/selectBoard.do")
@@ -38,7 +39,7 @@ public class A01_Controller {
 	@RequestMapping("/updateBoard.do")
 	public String updateBoard(Board board) {
 		service.updateBoard(board);
-		return "redirect:/selectBoard.do?no="+board.getPostid();
+		return "redirect:/selectBoard.do?postid="+board.getPostid();
 	}
 	
 	@RequestMapping("/deleteBoard.do")
@@ -46,5 +47,6 @@ public class A01_Controller {
 		service.deleteBoard(board);
 		return "redirect:/selectBoardList.do";
 	}
+
 	
 }
