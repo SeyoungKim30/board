@@ -5,13 +5,14 @@
 <mapper namespace="board.A03_Dao">
 
 <select id="selectBoardList" parameterType="boardSch" resultType="board">
-select b.*, rn from 
-	(select b2.* , rownum rn from board b2
-	WHERE 
-	subject LIKE '%'||#{searchSubject, jdbcType=VARCHAR}||'%'
-	) b
+select b3.postid, b3.subject,b3.regdte, rn from 
+ (SELECT b.*, rownum rn from
+	(select b2.* from board b2 
+	WHERE subject LIKE '%'||#{searchSubject, jdbcType=VARCHAR}||'%'
+	order by regdte DESC
+	) b) b3
 	where rn between 1+(30*(#{pageIndex}-1)) and (30*#{pageIndex})
-order by regdte DESC
+order by rn
 </select>
 
 <insert id="insertBoard" parameterType="board">
@@ -59,10 +60,9 @@ FROM BOARD b , (SELECT POSTID, COUNt(voca) countvoca
 								WHERE VOCA IN (SELECT voca FROM boardVoca WHERE POSTID=#{postid}) 
 								GROUP BY voca) sub1
 							WHERE countpost/(SELECT COUNT(DISTINCT postID) FROM boardVoca) <![CDATA[ < ]]> =0.4
-								AND countpost>1
 							)
 						GROUP BY POSTID ) sub3
-WHERE b.POSTID = sub3.postid and b.postid!=#{postid}
+WHERE b.POSTID = sub3.postid and b.postid!=#{postid} AND countvoca>1
 ORDER BY COUNTVOCA desc
 </select>
 

@@ -20,7 +20,7 @@ public class Komo {
 	  
 	/* 고유명사, 일반명사,동사,외국어만 단어로 */
 	  for (Token token : tokenList) {
-	        if(token.getPos().equals("NNP")||token.getPos().equals("NNG")||token.getPos().equals("VV")||token.getPos().equals("VA")||token.getPos().equals("SL")) {
+	        if(token.getPos().equals("NNP")||token.getPos().equals("NNG")||token.getPos().equals("VA")||token.getPos().equals("SL")) {
 	        	result.add(token.getMorph());
 	        }
 	   }

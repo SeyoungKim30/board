@@ -8,7 +8,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" ></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -17,10 +16,16 @@
 
 
 <style>
-header{text-align: center;background-color: lightblue;}
+header{
+	text-align: center;
+	background-color: darkblue;
+	height: 70px;}
 header h1 a{
 	all: unset;
 	cursor: pointer;
+	font-size:2rem;
+	font-weight: bold;
+	color:ivory;
 	}
 </style>
 
@@ -32,10 +37,27 @@ header h1 a{
 	<h1><a href="selectBoardList.do">글로벌 널리지 강의 정보</a></h1>
 	<div class="d-flex">
 		<button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary m-1">글쓰기</button>
-		<button class="btn btn-light m-1">로그인</button>
+		<button class="btn btn-light m-1" onclick="location.href='${path}/login.jsp'">로그인</button>
 	</div>
 	</nav>
 </header>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    <div class="modal-body">
+     		<h1>글쓰기</h1>
+			<form action="${path }/insertBoard.do" class="needs-validation" enctype="multipart/form-data" method="post">
+			<input name="subject" class="form-control" placeholder="subject" required>
+			<input name="writer" class="form-control" placeholder="writer" required>
+			<input name="postid" class="form-control" placeholder="postid" type="hidden" value="0">
+			<textarea name="content" rows="" cols="" class="form-control" required></textarea>
+			<button class="btn btn-primary" type="submit">등록</button>
+			</form>
+	</div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

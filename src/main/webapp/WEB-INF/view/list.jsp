@@ -35,23 +35,6 @@
 	</div>
 </form>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-    <div class="modal-body">
-     		<h1>글쓰기</h1>
-			<form action="${path }/insertBoard.do" class="needs-validation" enctype="multipart/form-data" method="post">
-			<input name="subject" class="form-control" placeholder="subject" required>
-			<input name="writer" class="form-control" placeholder="writer" required>
-			<input name="postid" class="form-control" placeholder="postid" type="hidden" value="0">
-			<textarea name="content" rows="" cols="" class="form-control" required></textarea>
-			<button class="btn btn-primary" type="submit">등록</button>
-			</form>
-	</div>
-    </div>
-  </div>
-</div>
-
 <script>
 var pageIndex=${search.pageIndex }
 var howmanyInoneblock= 5
