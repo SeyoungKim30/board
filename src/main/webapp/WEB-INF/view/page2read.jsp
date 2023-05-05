@@ -22,10 +22,11 @@
 <main class="container-xxl bd-gutter mt-3 my-md-4 bd-layout">
 
 <h3>${board.subject }</h3>
-<div>작성자 ${board.writer } / 작성일 ${board.regdte } / 조회수 ${board.readcnt } / 글번호 ${board.no }</div>
+<div>작성자 ${board.writer } / 작성일 ${board.regdte } / 글번호 ${board.postid }</div>
 <div>
 ${board.content }
 </div>
+<h4>연관게시글</h4>
 <ul>
 <li>연관게시글 1
 <li>연관게시글 2

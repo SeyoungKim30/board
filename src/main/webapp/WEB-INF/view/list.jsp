@@ -17,7 +17,7 @@
 <c:forEach items="${boardList}" var="each" >
 	<div class="row p-1">
 	<div class="col-2 text-center">${each.regdte }</div>
-	<div class="col"><a href="${path }/selectBoard.do?no=${each.no}&searchSubject=${search.searchSubject }&pageIndex=${search.pageIndex}">${each.subject }</a></div></div>
+	<div class="col"><a href="${path }/selectBoard.do?postid=${each.postid}&searchSubject=${search.searchSubject }&pageIndex=${search.pageIndex}">${each.subject }</a></div></div>
 </c:forEach>
 </div>
 
@@ -43,7 +43,7 @@
 			<form action="${path }/insertBoard.do" class="needs-validation" enctype="multipart/form-data" method="post">
 			<input name="subject" class="form-control" placeholder="subject" required>
 			<input name="writer" class="form-control" placeholder="writer" required>
-			<input name="no" class="form-control" placeholder="no" type="hidden" value="0">
+			<input name="postid" class="form-control" placeholder="postid" type="hidden" value="0">
 			<textarea name="content" rows="" cols="" class="form-control" required></textarea>
 			<button class="btn btn-primary" type="submit">등록</button>
 			</form>

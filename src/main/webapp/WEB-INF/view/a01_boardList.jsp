@@ -57,7 +57,7 @@
     <thead>
     
       <tr class="table-primary text-center">
-        <th>번호 no</th>
+        <th>번호 postid</th>
         <th>제목 subject</th>
         <th>작성자 writer</th>
         <th>작성일 regdte</th>
@@ -66,12 +66,12 @@
     </thead>	
     <tbody>
     <c:forEach items="${boardList}" var="each" >
-    	<tr><td>${each.no}</td>
+    	<tr><td>${each.postid}</td>
     		<td style="text-align:left;">
 	        	<c:forEach varStatus="ii" begin="2" end="${each.level }" >
 	    		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/></svg>
 				</c:forEach>
-    		<a href="${path }/selectBoard.do?no=${each.no}&searchWriter=${search.searchWriter }&searchSubject=${search.searchSubject }&pageIndex=${search.pageIndex}">${each.subject }</a>
+    		<a href="${path }/selectBoard.do?postid=${each.postid}&searchWriter=${search.searchWriter }&searchSubject=${search.searchSubject }&pageIndex=${search.pageIndex}">${each.subject }</a>
     		<span class="badge text-bg-light">${each.recount }</span></td>
     		<td>${each.writer }</td><td>${each.regdte }</td><td>${each.readcnt }</td></tr>
     </c:forEach>
@@ -88,7 +88,7 @@
 			<form action="${path }/insertBoard.do" class="needs-validation" enctype="multipart/form-data" method="post">
 			<input name="subject" class="form-control" placeholder="subject" required>
 			<input name="writer" class="form-control" placeholder="writer" required>
-			<input name="no" class="form-control" placeholder="no" type="hidden" value="0">
+			<input name="postid" class="form-control" placeholder="postid" type="hidden" value="0">
 		
 			<textarea name="content" rows="" cols="" class="form-control" required></textarea>
 			<p class="attachmentFile"></p>

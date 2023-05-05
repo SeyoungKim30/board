@@ -23,7 +23,7 @@ public class A01_Controller {
 	
 	@RequestMapping("/insertBoard.do")
 	public String insertBoard(Board board,Model d) {
-		int boardNo=service.insertBoard(board).getNo();
+		int boardNo=service.insertBoard(board).getPostid();
 		return "redirect:/selectBoard.do?no="+boardNo;
 	}
 	
@@ -38,7 +38,7 @@ public class A01_Controller {
 	@RequestMapping("/updateBoard.do")
 	public String updateBoard(Board board) {
 		service.updateBoard(board);
-		return "redirect:/selectBoard.do?no="+board.getNo();
+		return "redirect:/selectBoard.do?no="+board.getPostid();
 	}
 	
 	@RequestMapping("/deleteBoard.do")

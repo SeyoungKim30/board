@@ -37,6 +37,7 @@ create sequence board_seq
 insert into board values(1,0,'첫번째글','내용','홍길동',0, sysdate, sysdate);    
 insert into board values(board_seq.nextval,0,'test용 더미입력','내용','박박',0, sysdate, sysdate);    
 insert into board values(board_seq.nextval,0,'ㅎㅇㅇ','내용','김김',0, sysdate, sysdate);    
+INSERT INTO board (postid,subject,CONTENT,writer,regdte) VALUES (board_seq.nextval,'골라서 입력하기','이렇게 하면 되는게 맞는지 어쩐건지 에휴','김박박',sysdate);
 
   select * 
     from board 

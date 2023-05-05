@@ -15,22 +15,22 @@ order by regdte DESC
 </select>
 
 <insert id="insertBoard" parameterType="board">
-    <selectKey resultType="int" keyProperty="no" order="BEFORE">
+    <selectKey resultType="int" keyProperty="postid" order="BEFORE">
         SELECT board_seq.nextval FROM dual
     </selectKey>    
-insert into Board values(#{no},#{refno},#{subject},#{content},#{writer},#{readcnt},sysdate,null)
+INSERT INTO board (postid,subject,CONTENT,writer,regdte) values(#{postid},#{subject},#{content},#{writer},sysdate)
 </insert>
 
 <select id="selectBoard" parameterType="board" resultType="board">
-select * from board where no = #{no}
+select * from board where postid = #{postid}
 </select>
 
 <update id="updateBoard" parameterType="board" >
-UPDATE board SET subject = #{subject}, CONTENT = #{content}, uptdte=sysdate WHERE NO=#{no}
+UPDATE board SET subject = #{subject}, CONTENT = #{content}, uptdte=sysdate WHERE postid=#{postid}
 </update>
 
 <delete id="deleteBoard" parameterType="board" >
-DELETE board WHERE NO=#{no}
+DELETE board WHERE postid=#{postid}
 </delete>
 
 <select id="totalPage" parameterType="boardSch" resultType="int">
