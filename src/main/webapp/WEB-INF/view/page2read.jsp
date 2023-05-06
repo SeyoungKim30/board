@@ -28,7 +28,11 @@
 
 <article class="bg-light border">
 <h3>${board.subject }</h3>
-<div class="badge bg-primary text-wrap">작성자 ${board.writer } / 작성일 ${board.regdte } / 글번호 ${board.postid }</div>
+<div class="badgeBoard">
+	<span class="badge bg-primary">작성자 ${board.writer } </span>
+	<span class="badge bg-primary">작성일 ${board.regdte }</span>
+	<span class="badge bg-primary">글번호 ${board.postid }</span>
+</div>
 <div class="pt-3 pb-5 ">
 ${board.content }
 </div>
@@ -43,7 +47,23 @@ ${board.content }
 
 <%@include file="/WEB-INF/view/footer.jsp" %>
 
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    <div class="modal-body">
+     		<h1>수정하기</h1>
+			<form action="${path }/updateBoard.do" class="needs-validation" enctype="multipart/form-data" method="post">
+			<input name="postid" class="form-control" value="${board.postid }" readonly="readonly">
+			<input name="subject" class="form-control" value="${board.subject }" required>
+			<textarea name="content" rows="" cols="" class="form-control" required>${board.content }</textarea>
+			<button class="btn btn-primary" type="submit">등록</button>
+			</form>
+	</div>
+    </div>
+  </div>
+</div>
 <script>
+//연관글 비동기로 불러오기
 const relativePostlist = document.querySelector('#relativePostlist')
 
 fetch("${path}/selectRelative.do?postid=${board.postid }").then(response=>response.json())
@@ -55,6 +75,24 @@ fetch("${path}/selectRelative.do?postid=${board.postid }").then(response=>respon
 	})
 	relativePostlist.innerHTML = newlists;
 }).catch(error=>{console.error(error)})
+
+
+//작성자만 삭제 가능
+const logonid='${logon.id}'
+if(logonid=='${board.writer }'){
+	const badgeBoard = document.querySelector('.badgeBoard')
+	badgeBoard.insertAdjacentHTML('beforeend',`<span class="badge bg-warning" id='btnupdate' style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#updateModal">수정하기</span> `
+												+`<span class="badge bg-danger" id='btndelete' style="cursor: pointer">삭제하기</span>`);
+	const btndelete = document.querySelector('#btndelete');
+	const btnupdate = document.querySelector('#btnupdate');
+	
+	btndelete.addEventListener('click',function(){
+		if(confirm('글을 삭제할까요?')){
+			location.href='${path}/deleteBoard.do?postid=${board.postid}';
+		}
+	})
+	
+}
 </script>
 </body>
 

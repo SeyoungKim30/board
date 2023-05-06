@@ -14,12 +14,14 @@ public interface BoardDao {
 	public Board selectBoard(Board board);
 	
 	public void updateBoard(Board board);
+	
 	public void deleteBoard(Board board);
+	public void deleteBoardVoca(Board board);
 
 	public int totalPage(BoardSch search);
 	
 	public int insertVoca(Voca voca);
 	public List<Board> selectRelative(int postid);
 	
-	public List<Board> allboard();
+
 }

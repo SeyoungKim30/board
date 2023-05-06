@@ -49,9 +49,16 @@ public class BoardService {
 	
 	public void updateBoard(Board board) {
 		dao.updateBoard(board);
+		dao.deleteBoardVoca(board);
+		
+		Komo komo = new Komo();
+		Voca voca= new Voca(board.getPostid(), komo.analyzingList(board.getContent()+board.getSubject()));
+		dao.insertVoca(voca);
 	}
+	
 	public void deleteBoard(Board board) {
 		dao.deleteBoard(board);
+		dao.deleteBoardVoca(board);
 	}
 	
 	public List<Board> selectRelative(int postid) {

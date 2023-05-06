@@ -33,6 +33,10 @@ UPDATE board SET subject = #{subject}, CONTENT = #{content}, uptdte=sysdate WHER
 <delete id="deleteBoard" parameterType="board" >
 DELETE board WHERE postid=#{postid}
 </delete>
+<delete id="deleteBoardVoca"  parameterType="board">
+delete boardvoca where postid=#{postid}
+</delete>
+
 
 <select id="totalPage" parameterType="boardSch" resultType="int">
 SELECT CEIL(COUNT(*)/30) FROM BOARD b 

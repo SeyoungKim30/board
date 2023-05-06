@@ -57,9 +57,9 @@ h1,h2,h3,h4,h5,h6{ font-weight: bold;}
     <div class="modal-body">
      		<h1>글쓰기</h1>
 			<form action="${path }/insertBoard.do" class="needs-validation" enctype="multipart/form-data" method="post">
-			<input name="subject" class="form-control" placeholder="subject" required>
+			<input name="subject" class="form-control" placeholder="제목을 입력하세요" required>
 			<input name="writer" class="form-control" value="${logon.id }" type="hidden" required>
-			<textarea name="content" rows="" cols="" class="form-control" required></textarea>
+			<textarea name="content" rows="" cols="" class="form-control" required placeholder="내용을 입력하세요"></textarea>
 			<button class="btn btn-primary" type="submit">등록</button>
 			</form>
 	</div>
