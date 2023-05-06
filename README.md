@@ -28,3 +28,8 @@
 - 연관단어가 2개 이상 나타난 글이 연관 게시글로 검색
 - 연관단어가 많을수록, 자주 언급될 수록 연관도가 높은 글로 평가
 
+
+## 사용설명
+1. board\src\main\java\resource\a00_config 에서 Database를 설정할 수 있습니다.
+2. Scripts\Script.sql 파일을 실행합니다.
+3. 로컬호스트:포트/board/login.jsp 에서 아이디 sample78 , 비밀번호 password 로 로그인 할 수 있습니다.
