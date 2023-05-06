@@ -27,7 +27,7 @@ select * from board where postid = #{postid}
 </select>
 
 <update id="updateBoard" parameterType="board" >
-UPDATE board SET subject = #{subject}, CONTENT = #{content}, uptdte=sysdate WHERE postid=#{postid}
+UPDATE board SET subject = #{subject}, CONTENT = #{content} WHERE postid=#{postid}
 </update>
 
 <delete id="deleteBoard" parameterType="board" >
