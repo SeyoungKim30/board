@@ -1,8 +1,8 @@
 package board.vo;
 
 public class Voca {
-	int postid;
-	String[] vocaarr;
+	private int postid;
+	private String[] vocaarr;
 	
 	public Voca() {
 		super();

@@ -1,13 +1,13 @@
 package board.vo;
 // board.vo.BoardSch
 public class BoardSch {
-	String searchWriter;
-	String searchSubject;
+	private String searchWriter;
+	private String searchSubject;
 	
-	int pageIndex;	//매번 페이지 파라미터로 받기
-	int totalPage;
-	int howmanyInonepage=30;
-	int howmanyInoneblock=5;
+	private int pageIndex;	//매번 페이지 파라미터로 받기
+	private int totalPage;
+	private int howmanyInonepage=30;
+	private int howmanyInoneblock=5;
 	
 	
 	public BoardSch() {

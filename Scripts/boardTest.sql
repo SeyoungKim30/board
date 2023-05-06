@@ -50,7 +50,7 @@ WHERE b.POSTID = sub3.postid AND countvoca>1
 ORDER BY COUNTVOCA desc;
 
 --게시글 순서대로 안떠
-select b3.* from 
+select b3.postid, b3.subject,b3.regdte, rn from 
  (SELECT b.*, rownum rn from
 	(select b2.* from board b2 
 	WHERE subject LIKE '%'||''||'%'
@@ -60,6 +60,6 @@ select b3.* from
 order by rn
 ;
 
-select b2.postid,b2.SUBJECT, rownum from board b2 
-	WHERE subject LIKE '%'||''||'%'
-	order by regdte DESC;	
+--board 회원
+
+SELECT * FROM boardmember WHERE id='kim' AND password='1234';

@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>${board.subject }</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" ></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -16,21 +16,26 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 
+<style>
+
+</style>
+
 </head>
 <body>
 <%@include file="/WEB-INF/view/header.jsp" %>
 
-<main class="container-xxl bd-gutter mt-3 my-md-4 bd-layout">
+<main class="container-xl">
 
+<article class="bg-light border">
 <h3>${board.subject }</h3>
-<div>작성자 ${board.writer } / 작성일 ${board.regdte } / 글번호 ${board.postid }</div>
-<div>
+<div class="badge bg-primary text-wrap">작성자 ${board.writer } / 작성일 ${board.regdte } / 글번호 ${board.postid }</div>
+<div class="pt-3 pb-5 ">
 ${board.content }
 </div>
 <h4>연관게시글</h4>
 <ul id="relativePostlist">
 </ul>
-
+</article>
 
 <%@include file="/WEB-INF/view/list.jsp" %>
 </main>

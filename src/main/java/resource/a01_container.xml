@@ -50,6 +50,7 @@
 		<property name="dataSource" ref="dataSource"/>
 		<property name="configLocation" value="classpath:resource/a02_mybatis.xml"/>
 	</bean>
+	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="board"/>
 	</bean>	 

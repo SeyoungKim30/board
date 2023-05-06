@@ -1,4 +1,4 @@
-package board;
+package board.service;
 
 
 import java.util.List;
@@ -6,16 +6,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import board.dao.BoardDao;
 import board.vo.Board;
 import board.vo.BoardSch;
 import board.vo.Voca;
 import resource.Komo;
 
 @Service
-public class A02_Service {
+public class BoardService {
 
 	@Autowired
-	A03_Dao dao;
+	BoardDao dao;
 	
 	
 	public List<Board> selectBoardList(BoardSch search){

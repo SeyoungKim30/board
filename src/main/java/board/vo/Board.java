@@ -1,11 +1,11 @@
 package board.vo;
 
 public class Board {
-	int postid;
-	String subject;
-	String content ;
-	String writer ;
-    String regdte ;
+	private int postid;
+	private String subject;
+	private String content ;
+	private String writer ;
+	private String regdte ;
 
 	public Board() {
 		super();

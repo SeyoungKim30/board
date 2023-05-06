@@ -19,7 +19,8 @@
 header{
 	text-align: center;
 	background-color: darkblue;
-	height: 70px;}
+	height: 70px;
+	}
 header h1 a{
 	all: unset;
 	cursor: pointer;
@@ -27,8 +28,16 @@ header h1 a{
 	font-weight: bold;
 	color:ivory;
 	}
-</style>
 
+article{
+	width: 80%;
+  	min-width:300px;
+  	padding: 15px;
+  	margin: 0 auto;
+  	}
+  	
+h1,h2,h3,h4,h5,h6{ font-weight: bold;}
+</style>
 </head>
 <body>
 
@@ -36,8 +45,8 @@ header h1 a{
 <nav class="container-xxl bd-gutter flex-wrap flex-lg-nowrap">
 	<h1><a href="selectBoardList.do">글로벌 널리지 강의 정보</a></h1>
 	<div class="d-flex">
-		<button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary m-1">글쓰기</button>
-		<button class="btn btn-light m-1" onclick="location.href='${path}/login.jsp'">로그인</button>
+		<button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary m-1" id="writebtn">글쓰기</button>
+		<button class="btn btn-light m-1" id="loginbtn">로그인</button>
 	</div>
 	</nav>
 </header>
@@ -59,5 +68,20 @@ header h1 a{
   </div>
 </div>
 
+<script>
+	const writebtn = document.querySelector("#writebtn");
+	const loginbtn = document.querySelector("#loginbtn");
+	if('${logon.id}'==''){
+		writebtn.remove();
+		loginbtn.addEventListener('click',function(){
+			location.href='${path}/login.jsp';
+		})
+	}else{
+		loginbtn.innerHTML='로그아웃';
+		loginbtn.addEventListener('click',function(){
+			location.href='${path}/signout.do'
+		})
+	}
+</script>
 </body>
 </html>

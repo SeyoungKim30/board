@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >	
+<mapper namespace="board.dao.MemberDao">
+
+<select id="selectMemberSignIn" parameterType="member" resultType="member">
+	SELECT * FROM boardmember
+	where id=#{id} and password =#{password}
+</select>
+
+<insert id="insertMember" parameterType="member">
+insert into boardmember values (#{id}, #{password}, #{username},0)
+</insert>
+
+<select id="selectMemberID" parameterType="string" resultType="_int">
+select count(id) from boardmember where id= #{id}
+</select>
+
+</mapper>		
+		

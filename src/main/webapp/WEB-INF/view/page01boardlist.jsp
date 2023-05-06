@@ -18,7 +18,7 @@
 </head>
 <body>
 <%@include file="/WEB-INF/view/header.jsp" %>
-<main class="container-xxl bd-gutter mt-3 my-md-4 bd-layout">
+<main class="container-xl">
 
 <%@include file="/WEB-INF/view/list.jsp" %>
 

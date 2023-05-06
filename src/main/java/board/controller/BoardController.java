@@ -1,4 +1,4 @@
-package board;
+package board.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,17 +6,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import board.service.BoardService;
 import board.vo.Board;
 import board.vo.BoardSch;
-import board.vo.Voca;
+
 
 @Controller
-public class A01_Controller {
+public class BoardController {
 
 	@Autowired
-	A02_Service service;
+	BoardService service;
 	
 	@RequestMapping("/selectBoardList.do")
 	public String selectBoardList(@ModelAttribute("search") BoardSch search, Model d) {
