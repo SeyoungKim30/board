@@ -58,8 +58,7 @@ h1,h2,h3,h4,h5,h6{ font-weight: bold;}
      		<h1>글쓰기</h1>
 			<form action="${path }/insertBoard.do" class="needs-validation" enctype="multipart/form-data" method="post">
 			<input name="subject" class="form-control" placeholder="subject" required>
-			<input name="writer" class="form-control" placeholder="writer" required>
-			<input name="postid" class="form-control" placeholder="postid" type="hidden" value="0">
+			<input name="writer" class="form-control" value="${logon.id }" type="hidden" required>
 			<textarea name="content" rows="" cols="" class="form-control" required></textarea>
 			<button class="btn btn-primary" type="submit">등록</button>
 			</form>

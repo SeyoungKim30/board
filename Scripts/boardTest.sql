@@ -8,7 +8,7 @@ SELECT * FROM board ORDER BY regdte DESC ;
 
 SELECT count(DISTINCT voca),count(voca) FROM boardvoca ;
 
-SELECT voca FROM boardvoca WHERE voca='하';
+SELECT voca FROM boardvoca ;
 
 --특정글의 40퍼 이하인 키워드
 SELECT * 
@@ -62,4 +62,4 @@ order by rn
 
 --board 회원
 
-SELECT * FROM boardmember WHERE id='kim' AND password='1234';
+SELECT * FROM boardmember ;

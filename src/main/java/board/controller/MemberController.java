@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -17,12 +18,15 @@ public class MemberController {
 	MemberService service;
 	
 	@RequestMapping("/signin.do")
-	public String signin(Member member,HttpSession session) {
+	public String signin(Member member,HttpSession session,Model d) {
 		member=service.selectMemberSignIn(member);
 		if(member!=null) {
 			session.setAttribute("logon",member);
+			return "redirect:/selectBoardList.do";
+		}else {
+			d.addAttribute("signinFail", "로그인에 실패했습니다.");
+			return "redirect:/login.jsp";
 		}
-		return "redirect:/selectBoardList.do";
 	}
 	
 	@RequestMapping("/signout.do")
