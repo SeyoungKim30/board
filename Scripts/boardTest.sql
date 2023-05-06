@@ -8,7 +8,7 @@ SELECT * FROM board ORDER BY regdte DESC ;
 
 SELECT count(DISTINCT voca),count(voca) FROM boardvoca ;
 
-SELECT voca FROM boardvoca ;
+SELECT * FROM boardvoca WHERE POSTID =237;
 
 --특정글의 40퍼 이하인 키워드
 SELECT * 

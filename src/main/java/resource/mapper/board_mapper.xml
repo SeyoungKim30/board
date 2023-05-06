@@ -43,8 +43,8 @@ SELECT CEIL(COUNT(*)/30) FROM BOARD b
 
 <insert id="insertVoca" parameterType="voca">
   INSERT All 
-  <foreach collection="vocaarr" item="item" >
-  	INTO boardvoca(postid,voca) VALUES (#{postid},#{item})
+  <foreach collection="vocalist" item="item" >
+  	INTO boardvoca(postid,voca,frequency) VALUES (#{postid},#{item.voca},#{item.frequency})
   </foreach>
   SELECT * FROM dual
 </insert>

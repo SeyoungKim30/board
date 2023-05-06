@@ -36,9 +36,8 @@ public class BoardService {
 
 		//본문 내용으로 voca만들기
 		Komo komo = new Komo();
-		String[] vocas = komo.analyzing(board.getContent()+board.getSubject()).toArray(new String[0]);
 		//voca 저장
-		Voca voca= new Voca(board.getPostid(), vocas);
+		Voca voca= new Voca(board.getPostid(), komo.analyzingList(board.getContent()+board.getSubject()));
 		dao.insertVoca(voca);
 		return board;
 	}
@@ -58,5 +57,6 @@ public class BoardService {
 	public List<Board> selectRelative(int postid) {
 		return dao.selectRelative(postid);
 	}
+	
 	
 }

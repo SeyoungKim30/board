@@ -56,6 +56,5 @@ public class BoardController {
 		d.addAttribute("relativePosts",service.selectRelative(postid));
 		return "pageJsonReport";
 	}
-
 	
 }

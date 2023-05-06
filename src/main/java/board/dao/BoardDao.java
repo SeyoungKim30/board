@@ -20,4 +20,6 @@ public interface BoardDao {
 	
 	public int insertVoca(Voca voca);
 	public List<Board> selectRelative(int postid);
+	
+	public List<Board> allboard();
 }
