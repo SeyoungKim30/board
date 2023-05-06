@@ -3,11 +3,13 @@
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias alias="boardFile" type="board.vo.BoardFile"/>
 		<typeAlias alias="board" type="board.vo.Board"/>
 		<typeAlias alias="boardSch" type="board.vo.BoardSch"/>
+		<typeAlias alias="voca" type="board.vo.Voca"/>
+		<typeAlias alias="member" type="board.vo.Member"/>
 	</typeAliases>
 	<mappers>
-		<mapper resource="resource/a03_Mapper.xml"/>
+		<mapper resource="resource/mapper/board_mapper.xml"/>
+		<mapper resource="resource/mapper/member_mapper.xml"/>
 	</mappers>
 </configuration>
