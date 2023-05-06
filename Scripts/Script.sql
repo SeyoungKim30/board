@@ -22,9 +22,6 @@ CREATE TABLE boardvoca (
 	frequency number
 	);     
 
-
---sample 데이터 등록
-
 CREATE TABLE boardMEMBER(
 	id char(8),
 	password varchar2(20),
@@ -33,3 +30,5 @@ CREATE TABLE boardMEMBER(
 	);
 
 DROP TABLE boardmember;
+
+INSERT INTO boardmember VALUES ('sample78','password','글로벌',1);

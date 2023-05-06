@@ -51,10 +51,10 @@ SELECT b.postid, b.SUBJECT, b.REGDTE, countvoca,sumFREQUENCY
 FROM BOARD b , 
 	(SELECT POSTID, count(voca) countvoca,sum(frequency) sumFREQUENCY  FROM boardVoca WHERE voca IN (	--사용가능 단어가 포스트별로 몇개 있는지
 			SELECT voca FROM 		--이 글의 단어를 가진 글의 수/ 전체글의 수 = 0.4인 단어만 골라내기
-				(SELECT voca, COUNT(postid) countpost FROM boardVoca WHERE VOCA IN (SELECT voca FROM boardVoca WHERE POSTID='200') GROUP BY voca) sub1		--이 글의 단어를 가진 글의 수
+				(SELECT voca, COUNT(postid) countpost FROM boardVoca WHERE VOCA IN (SELECT voca FROM boardVoca WHERE POSTID='214') GROUP BY voca) sub1		--이 글의 단어를 가진 글의 수
 			WHERE countpost/(SELECT COUNT(DISTINCT postID) FROM boardVoca)<=0.4		--이 글의 단어를 가진 글의 수/ 전체글의 수 = 0.4인 단어만 골라내기
 	) GROUP BY POSTID ) sub3
 WHERE b.POSTID = sub3.postid AND countvoca>=2
 ORDER BY sumFREQUENCY desc;
 
-
+SELECT * FROM boardvoca WHERE postid=233;
