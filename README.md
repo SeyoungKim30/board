@@ -20,6 +20,10 @@
 - Bootstrap
 
 ## 기능 설명
+|![image](https://user-images.githubusercontent.com/112458754/236670134-b3576f0d-7559-4d3a-9c90-b0022c69148c.png)|![image](https://user-images.githubusercontent.com/112458754/236670313-60d7d32a-a562-4c00-b0ef-cc08c82dca11.png)|
+|---|---|
+
+
 #### 연관게시물
 - 게시글을 등록할때 형태소 분석을 통해 대명사, 고유명사, 외국어 분류
 - 게시글 id, 분류된 단어, 해당 글에 나온 횟수가 DB에 저장
