@@ -17,13 +17,13 @@
 
 </head>
 <body>
-<%@include file="/WEB-INF/view/header.jsp" %>
+<%@include file="/resource/header.jsp" %>
 <main class="container-xl">
 
 <%@include file="/WEB-INF/view/list.jsp" %>
 
 </main>
-<%@include file="/WEB-INF/view/footer.jsp" %>
+<%@include file="/resource/footer.jsp" %>
 </body>
 <
 </html>

@@ -22,7 +22,7 @@
 
 </head>
 <body>
-<%@include file="/WEB-INF/view/header.jsp" %>
+<%@include file="/resource/header.jsp" %>
 
 <main class="container-xl">
 
@@ -45,7 +45,7 @@ ${board.content }
 </main>
 
 
-<%@include file="/WEB-INF/view/footer.jsp" %>
+<%@include file="/resource/footer.jsp" %>
 
 <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">

@@ -21,9 +21,9 @@ public class Komo {
 	  List<Voca> result= new ArrayList<Voca> ();
 	  
 	/* 고유명사, 일반명사, 외국어만 단어로 */
-	  for (Token token : tokenList) {	//분석된 형태소별로 돌림
+	  for (Token token : tokenList) {	//분석된 형태소별로 반복
 	        if(token.getPos().equals("NNP")||token.getPos().equals("NNG")||token.getPos().equals("SL")) {
-	         	boolean found = false;	//찾으면 true, 이미 저장된거 없으면 false니까 새로 ㅁ더해주면 됨
+	         	boolean found = false;	//해당 형태소가 이미 List에 있으면 true, 없으면 false
 	        	for(Voca vv:result) {
 	        		if(vv.getVoca().equals(token.getMorph())) {
 	        			vv.setFrequency(vv.getFrequency()+1);

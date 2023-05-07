@@ -45,6 +45,7 @@ public class MemberController {
 		return "redirect:/selectBoardList.do";
 	}
 	
+	//아이디 중복검사
 	@ResponseBody
 	@RequestMapping("/id-duplicationCheck.do")
 	public String idDuplication(String id){

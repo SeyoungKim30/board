@@ -50,7 +50,7 @@
 </head>
 
 <body class="text-center">
-<%@include file="/WEB-INF/view/header.jsp" %>
+<%@include file="/resource/header.jsp" %>
     <form class="form-signin" action="${path }/signin.do" method="post">
       <h1 class="h3 mb-3 font-weight-normal">로그인하세요</h1>
       <label for="inputid" class="sr-only">아이디</label>
@@ -94,7 +94,7 @@
     </div>
   </div>
 </div>
-
+<%@include file="/resource/footer.jsp" %>
 <script>
 const duplicationCheck = document.querySelector('#duplicationCheck');
 const idinput = document.querySelector('#newid');
