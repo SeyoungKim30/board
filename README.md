@@ -44,4 +44,4 @@
 ## 사용설명
 1. board\src\main\java\resource\a00_config 에서 Database를 설정할 수 있습니다.
 2. Scripts\Script.sql 파일을 실행합니다.
-3. 로컬호스트:포트/board/login.jsp 에서 아이디 sample78 , 비밀번호 password 로 로그인 할 수 있습니다.
+3. /board로 접속 후 아이디 sample78 , 비밀번호 password 로 로그인 할 수 있습니다.
