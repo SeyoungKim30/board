@@ -1,15 +1,24 @@
 package board.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import board.service.BoardService;
 import board.vo.Board;
 import board.vo.BoardSch;
+import board.vo.Comment;
+import board.vo.Member;
 
 
 @Controller
@@ -53,6 +62,23 @@ public class BoardController {
 	public String deleteBoard(Board board) {
 		service.deleteBoard(board);
 		return "redirect:/selectBoardList.do";
+	}
+	
+
+	@RequestMapping("/insertComment.do")
+	public String insertComment(Comment comment,HttpSession session) {
+		return service.insertComment(comment,(Member)session.getAttribute("logon"))+"";
+	}
+	
+	@RequestMapping("/deleteComment.do")
+	public String deleteComment(Comment comment) {
+		return service.deleteComment(comment)+"" ;
+	}
+	
+	@RequestMapping("/selectComment.do")
+	public String selectComment(int postid,Model d){
+		d.addAttribute("commentList",service.selectComment(postid));
+		return "1";
 	}
 	
 	//연관 게시글

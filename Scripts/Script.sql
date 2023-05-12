@@ -32,3 +32,20 @@ CREATE TABLE boardMEMBER(
 DROP TABLE boardmember;
 
 INSERT INTO boardmember VALUES ('sample78','password','글로벌',1);
+
+DROP TABLE boardcomment;
+
+CREATE TABLE BOARDCOMMENT (
+	id NUMBER PRIMARY KEY,
+	postid NUMBER,
+	writer char(8),
+	COMMENTS varchar2(1000),
+	writedate DATE
+);
+
+create sequence comment_seq
+      start with 1
+      minvalue 1
+      maxvalue 999999
+      increment by 1;
+SELECT * FROM BOARDCOMMENT b ;

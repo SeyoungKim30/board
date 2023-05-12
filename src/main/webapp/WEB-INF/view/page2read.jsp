@@ -36,10 +36,41 @@
 <div class="pt-3 pb-5 ">
 ${board.content }
 </div>
-<h4>연관게시글</h4>
-<ul id="relativePostlist">
-</ul>
+
+<div class="comments">
+<h4>Comments</h4>
+	<div class="border-top">
+		<div class="row">
+			<div class="col">이름</div>
+			<div class="col-2">작성시일 <span class="badge bg-danger">삭제</span></div>
+		</div>
+		<div class="row">
+			<div class="col">작성내용</div>
+		</div>
+	</div>
+</div>
+	
+	<div class="border-top">
+		<div class="row">
+		<form class="needs-validation" id="commentForm">
+		<input type="hidden" name="postid" value="${board.postid }" required="required">
+			<div class="col"><input class="form-control" name="comments" maxlength="999" disabled required="required"></div>
+			<div class="col-2"><button class="btn btn-primary text-center" id="commentsubmitbtn" disabled>submit</button></div>
+		</form>
+		</div>
+	</div>	
+	
+
+
 </article>
+
+<article class="bg-light border" style="margin-top:2rem;">
+	<h4>연관게시글</h4>
+	<ul id="relativePostlist">
+	</ul>
+</article>
+
+
 
 <%@include file="/WEB-INF/view/list.jsp" %>
 </main>
@@ -92,6 +123,31 @@ if(logonid=='${board.writer }'){
 		}
 	})
 	
+}
+
+//덧글 불러오기
+const commentForm= document.querySelector('#commentForm')
+commentForm.addEventListener('submit', (e) => {
+	e.preventDefault();
+	const commentsubmitbtn = document.querySelector('#commentsubmitbtn')
+	var json= {"postid":$("[name=postid]").val(),"comments":$("[name=comments]").val()}
+	fetch('${path}/tempPassword.do', {
+    	  method: 'POST',
+    	  body: JSON.stringify(json),
+    	  headers: {
+    	    'Content-Type': 'application/json'
+    	  }
+	}).catch(error=>{console.error(error)})
+	console.log(commentsubmitbtn)
+	
+})
+
+
+
+//로그인 했을때만 덧글 가능
+if(logonid!=''){
+	commentsubmitbtn.disabled=false;
+	document.querySelector('[name=comments]').disabled=false;
 }
 </script>
 </body>

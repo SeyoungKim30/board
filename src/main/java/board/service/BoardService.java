@@ -9,16 +9,18 @@ import org.springframework.stereotype.Service;
 import board.dao.BoardDao;
 import board.vo.Board;
 import board.vo.BoardSch;
+import board.vo.Comment;
+import board.vo.Member;
 import board.vo.Voca;
 import resource.Komo;
+
 
 @Service
 public class BoardService {
 
 	@Autowired
 	BoardDao dao;
-	
-	
+
 	public List<Board> selectBoardList(BoardSch search){
 		//search 세팅 : 페이지관련
 		if(search.getPageIndex()==0) {search.setPageIndex(1);}	//위치정보 아무것도 없으면 1
@@ -34,10 +36,8 @@ public class BoardService {
 	public Board insertBoard(Board board) {
 		dao.insertBoard(board);
 
-		//본문 내용으로 voca만들기
-		Komo komo = new Komo();
 		//voca 저장
-		Voca voca= new Voca(board.getPostid(), komo.analyzingList(board.getContent()+board.getSubject()));
+		Voca voca= new Voca(board.getPostid(), Komo.analyzingList(board.getContent()+board.getSubject()));
 		dao.insertVoca(voca);
 		return board;
 	}
@@ -51,8 +51,7 @@ public class BoardService {
 		dao.updateBoard(board);
 		dao.deleteBoardVoca(board);
 		
-		Komo komo = new Komo();
-		Voca voca= new Voca(board.getPostid(), komo.analyzingList(board.getContent()+board.getSubject()));
+		Voca voca= new Voca(board.getPostid(), Komo.analyzingList(board.getContent()+board.getSubject()));
 		dao.insertVoca(voca);
 	}
 	
@@ -60,6 +59,20 @@ public class BoardService {
 		dao.deleteBoard(board);
 		dao.deleteBoardVoca(board);
 	}
+	
+	public int insertComment(Comment comment,Member member) {
+		comment.setWriter(member.getId());
+		return dao.insertComment(comment);
+	}
+	
+	public int deleteComment(Comment comment) {
+		return dao.deleteComment(comment);
+	}
+	
+	public List<Comment> selectComment(int postid){
+		return dao.selectComment(postid);
+	}
+	
 	
 	public List<Board> selectRelative(int postid) {
 		return dao.selectRelative(postid);

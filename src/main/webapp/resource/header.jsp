@@ -43,29 +43,13 @@ h1,h2,h3,h4,h5,h6{ font-weight: bold;}
 
 <header class="navbar navbar-expand-lg bd-navbar sticky-top">
 <nav class="container-xxl bd-gutter flex-wrap flex-lg-nowrap">
-	<h1><a href="selectBoardList.do">글로벌 널리지 강의 정보</a></h1>
+	<h1><a href="selectBoardList.do">게시물 워터게시판</a></h1>
 	<div class="d-flex">
-		<button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary m-1" id="writebtn">글쓰기</button>
+		<button type="button" class="btn btn-primary m-1" id="writebtn">글쓰기</button>
 		<button class="btn btn-light m-1" id="loginbtn">로그인</button>
 	</div>
 	</nav>
 </header>
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-    <div class="modal-body">
-     		<h1>글쓰기</h1>
-			<form action="${path }/insertBoard.do" class="needs-validation" enctype="multipart/form-data" method="post">
-			<input name="subject" class="form-control" placeholder="제목을 입력하세요" required>
-			<input name="writer" class="form-control" value="${logon.id }" type="hidden" required>
-			<textarea name="content" rows="" cols="" class="form-control" required placeholder="내용을 입력하세요"></textarea>
-			<button class="btn btn-primary" type="submit">등록</button>
-			</form>
-	</div>
-    </div>
-  </div>
-</div>
 
 <script>
 	const writebtn = document.querySelector("#writebtn");
@@ -77,9 +61,8 @@ h1,h2,h3,h4,h5,h6{ font-weight: bold;}
 		})
 	}else{
 		loginbtn.innerHTML='로그아웃';
-		loginbtn.addEventListener('click',function(){
-			location.href='${path}/signout.do'
-		})
+		loginbtn.addEventListener('click',()=>{location.href='${path}/signout.do';})
+		writebtn.addEventListener('click',()=>{location.href='${path}/page3write.jsp';})
 	}
 </script>
 </body>

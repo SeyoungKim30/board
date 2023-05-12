@@ -38,6 +38,18 @@ delete boardvoca where postid=#{postid}
 </delete>
 
 
+<insert id="insertComment" parameterType="comment">
+insert into BOARDCOMMENT values(comment_seq.nextval,#{postid},#{writer},#{comments},sysdate)
+</insert>
+
+<delete id="deleteComment">
+delete BOARDCOMMENT where postid=#{postid} and id=#{id}
+</delete>
+
+<select id="selectComment" parameterType="java.lang.Integer">
+select * from BOARDCOMMENT where postid = #{postid} order by writedate
+</select>
+
 <select id="totalPage" parameterType="boardSch" resultType="int">
 SELECT CEIL(COUNT(*)/30) FROM BOARD b 
 	WHERE 

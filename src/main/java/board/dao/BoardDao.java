@@ -4,6 +4,7 @@ import java.util.List;
 
 import board.vo.Board;
 import board.vo.BoardSch;
+import board.vo.Comment;
 import board.vo.Voca;
 
 // board.A03_Dao
@@ -18,6 +19,10 @@ public interface BoardDao {
 	public void deleteBoard(Board board);
 	public void deleteBoardVoca(Board board);
 
+	public int insertComment(Comment comment);
+	public int deleteComment(Comment comment);
+	public List<Comment> selectComment(int postid);
+	
 	public int totalPage(BoardSch search);
 	
 	public int insertVoca(Voca voca);
