@@ -19,6 +19,10 @@
 - [Komoran](https://docs.komoran.kr/index.html)
 - Bootstrap
 
+## ERD
+<img width="70%" src="https://user-images.githubusercontent.com/112458754/236673597-a90ad9c0-b23b-40f0-80ca-17ea3108557e.png">
+
+
 ## 기능 설명
 |![image](https://user-images.githubusercontent.com/112458754/236670134-b3576f0d-7559-4d3a-9c90-b0022c69148c.png)|![image](https://user-images.githubusercontent.com/112458754/236670313-60d7d32a-a562-4c00-b0ef-cc08c82dca11.png)|
 |---|---|
@@ -44,4 +48,3 @@
 ## 사용설명
 1. board\src\main\java\resource\a00_config 에서 Database를 설정할 수 있습니다.
 2. Scripts\Script.sql 파일을 실행합니다.
-3. /board로 접속 후 아이디 sample78 , 비밀번호 password 로 로그인 할 수 있습니다.
