@@ -28,7 +28,7 @@
 
 
 #### 연관게시물
-- 게시글을 등록할때 형태소 분석을 통해 대명사, 고유명사, 외국어 분류 [✔코드 확인](https://github.com/SeyoungKim30/board/blob/6589d57d8be503eb49633094d0089e280205965b/src/main/java/resource/Komo.java#L16)
+- 게시글을 등록할때 형태소 분석을 통해 대명사, 고유명사, 외국어 분류 [✔코드 확인](https://github.com/SeyoungKim30/board/blob/80702110ad80a16239dc70baac21225005a0b84c/src/main/java/board/service/Komo.java#L14)
 - 게시글 id, 분류된 단어, 해당 글에 나온 횟수가 DB에 저장 [✔코드확인](https://github.com/SeyoungKim30/board/blob/6589d57d8be503eb49633094d0089e280205965b/src/main/java/board/service/BoardService.java#L38)
 - 게시글 조회 시 연관 게시물 검색[✔코드확인](https://github.com/SeyoungKim30/board/blob/6589d57d8be503eb49633094d0089e280205965b/src/main/java/resource/mapper/board_mapper.xml#L56)
 - 전체 게시글 중 해당 단어가 사용된 글이 40% 이하일 때, 연관 게시물을 파악하는 단어로 사용 
