@@ -43,7 +43,7 @@ h1,h2,h3,h4,h5,h6{ font-weight: bold;}
 
 <header class="navbar navbar-expand-lg bd-navbar sticky-top">
 <nav class="container-xxl bd-gutter flex-wrap flex-lg-nowrap">
-	<h1><a href="selectBoardList.do">게시물 워터게시판</a></h1>
+	<h1><a href="selectBoardList.do">연관게시물 제공하는 게시판</a></h1>
 	<div class="d-flex">
 		<button type="button" class="btn btn-primary m-1" id="writebtn">글쓰기</button>
 		<button class="btn btn-light m-1" id="loginbtn">로그인</button>

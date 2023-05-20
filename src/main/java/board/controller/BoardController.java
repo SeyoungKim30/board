@@ -73,9 +73,6 @@ public class BoardController {
 		 Comment comment= new Comment();
 		try {
 			comment = mapper.readValue(commentData, Comment.class);
-			System.out.println(comment.getComments());
-			System.out.println(comment.getPostid());
-			System.out.println((Member)session.getAttribute("logon"));
 			return service.insertComment(comment,(Member)session.getAttribute("logon"));
 		} catch (JsonParseException e) {
 			e.printStackTrace();

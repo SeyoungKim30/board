@@ -13,7 +13,7 @@
 </head>
 
 <%
-response.sendRedirect("/selectBoardList.do");
+response.sendRedirect("${path}/selectBoardList.do");
 %>
 
 </html>

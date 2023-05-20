@@ -48,5 +48,3 @@ create sequence comment_seq
       minvalue 1
       maxvalue 999999
       increment by 1;
-     
-SELECT * FROM BOARDCOMMENT b ;

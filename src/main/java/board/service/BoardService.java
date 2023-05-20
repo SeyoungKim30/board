@@ -12,7 +12,6 @@ import board.vo.BoardSch;
 import board.vo.Comment;
 import board.vo.Member;
 import board.vo.Voca;
-import resource.Komo;
 
 
 @Service
@@ -20,6 +19,9 @@ public class BoardService {
 
 	@Autowired
 	BoardDao dao;
+	
+	@Autowired
+	Komo komo;
 
 	public List<Board> selectBoardList(BoardSch search){
 		//search 세팅 : 페이지관련
@@ -35,9 +37,8 @@ public class BoardService {
 	
 	public Board insertBoard(Board board) {
 		dao.insertBoard(board);
-
-		//voca 저장
-		Voca voca= new Voca(board.getPostid(), Komo.analyzingList(board.getContent()+board.getSubject()));
+	
+		Voca voca= new Voca(board.getPostid(), komo.analyzingList(board.getContent()+board.getSubject()));
 		dao.insertVoca(voca);
 		return board;
 	}
@@ -51,7 +52,7 @@ public class BoardService {
 		dao.updateBoard(board);
 		dao.deleteBoardVoca(board);
 		
-		Voca voca= new Voca(board.getPostid(), Komo.analyzingList(board.getContent()+board.getSubject()));
+		Voca voca= new Voca(board.getPostid(), komo.analyzingList(board.getContent()+board.getSubject()));
 		dao.insertVoca(voca);
 	}
 	

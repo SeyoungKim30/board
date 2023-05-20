@@ -1,7 +1,9 @@
-package resource;
+package board.service;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.stereotype.Component;
 
 import board.vo.Voca;
 import kr.co.shineware.nlp.komoran.constant.DEFAULT_MODEL;
@@ -9,9 +11,10 @@ import kr.co.shineware.nlp.komoran.core.Komoran;
 import kr.co.shineware.nlp.komoran.model.KomoranResult;
 import kr.co.shineware.nlp.komoran.model.Token;
 
- public class Komo {
+@Component
+public class Komo {
   
-	 static public List<Voca> analyzingList(String str) {
+	 public List<Voca> analyzingList(String str) {
 	  Komoran komoran = new Komoran(DEFAULT_MODEL.STABLE);
 	  KomoranResult analyzeResultList = komoran.analyze(str);
 	  
