@@ -27,7 +27,10 @@
 			
 			<input name="writer" class="form-control" value="${logon.id }" type="hidden" required>
 			
-			<textarea name="content" rows="" cols="" class="form-control" required placeholder="내용을 입력하세요"></textarea>
+			<textarea name="content" rows="20" cols="" class="form-control" required placeholder="내용을 입력하세요"></textarea>
+			
+			<p class="attachmentFile"></p>
+			<button type="button" class="btn" id="morefileBtn">파일추가</button>
 			
 			<button class="btn btn-primary" type="submit">등록</button>
 			
@@ -35,4 +38,12 @@
 </main>
 <%@include file="/resource/footer.jsp" %>		
 </body>
+
+<script>
+const morefileBtn = document.querySelector("#morefileBtn");
+morefileBtn.addEventListener('click',function(){
+	$('.attachmentFile').append('<input type="file" name="filelist" class="form-control">')
+})
+
+</script>
 </html>

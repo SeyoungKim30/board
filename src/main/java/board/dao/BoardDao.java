@@ -3,6 +3,7 @@ package board.dao;
 import java.util.List;
 
 import board.vo.Board;
+import board.vo.BoardFile;
 import board.vo.BoardSch;
 import board.vo.Comment;
 import board.vo.Voca;
@@ -27,6 +28,8 @@ public interface BoardDao {
 	
 	public int insertVoca(Voca voca);
 	public List<Board> selectRelative(int postid);
+	
+	public int insertFile(BoardFile boardFile);
 	
 
 }

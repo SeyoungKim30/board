@@ -1,23 +1,30 @@
 package board.vo;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 public class Board {
 	private int postid;
 	private String subject;
 	private String content ;
 	private String writer ;
 	private String regdte ;
+	private List<MultipartFile> filelist;
 
 	public Board() {
 		super();
 	}
 
-	public Board(int postid, String subject, String content, String writer, String regdte) {
+	
+	public Board(int postid, String subject, String content, String writer, String regdte, List<MultipartFile> filelist) {
 		super();
 		this.postid = postid;
 		this.subject = subject;
 		this.content = content;
 		this.writer = writer;
 		this.regdte = regdte;
+		this.filelist = filelist;
 	}
 
 	public int getPostid() {
@@ -58,6 +65,16 @@ public class Board {
 
 	public void setRegdte(String regdte) {
 		this.regdte = regdte;
+	}
+
+
+	public List<MultipartFile> getFilelist() {
+		return filelist;
+	}
+
+
+	public void setFilelist(List<MultipartFile> filelist) {
+		this.filelist = filelist;
 	}
 
 

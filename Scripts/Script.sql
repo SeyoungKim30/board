@@ -48,3 +48,13 @@ create sequence comment_seq
       minvalue 1
       maxvalue 999999
       increment by 1;
+      
+DROP TABLE BOARDFILE ;
+
+CREATE TABLE boardfile(
+	postid NUMBER,
+	fileid NUMBER,
+	filename varchar2(50)
+	);
+	
+SELECT * FROM boardfile;

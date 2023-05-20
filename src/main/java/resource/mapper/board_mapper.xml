@@ -77,5 +77,10 @@ WHERE b.POSTID = sub2.postid and b.postid!=#{postid} AND countvoca>=2
 ORDER BY sumFREQUENCY desc
 </select>
 
+<insert id="insertFile" parameterType="boardFile">
+	insert into boardfile values (#{postid}, #{fileid},#{filename})
+</insert>
+
+
 </mapper>		
 		
