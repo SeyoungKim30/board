@@ -24,8 +24,7 @@
 
 
 ## 기능 설명
-|![image](https://user-images.githubusercontent.com/112458754/236670134-b3576f0d-7559-4d3a-9c90-b0022c69148c.png)|![image](https://user-images.githubusercontent.com/112458754/236670313-60d7d32a-a562-4c00-b0ef-cc08c82dca11.png)|
-|---|---|
+<img width="60%" src="https://github.com/SeyoungKim30/board/assets/112458754/973728f9-db42-4359-b0bc-d9491d885436">
 
 
 #### 연관게시물
@@ -36,9 +35,10 @@
 - 연관단어가 2개 이상 나타난 글이 연관 게시글로 검색
 - 연관단어가 많을수록, 자주 언급될 수록 연관도가 높은 글로 평가
 
-#### 게시글 작성
-- 회원만 게시글 작성 가능
+#### 게시글, 코멘트 작성
+- 회원만 작성 가능
 - 본인이 작성한 글만 수정, 삭제 가능
+- 코멘트 등록, 삭제 fetch
 
 #### 게시글 목록 탐색
 - 글 제목으로 검색 가능 [✔코드확인](https://github.com/SeyoungKim30/board/blob/6589d57d8be503eb49633094d0089e280205965b/src/main/java/resource/mapper/board_mapper.xml#L7)
