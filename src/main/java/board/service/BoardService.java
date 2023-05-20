@@ -60,9 +60,13 @@ public class BoardService {
 		dao.deleteBoardVoca(board);
 	}
 	
-	public int insertComment(Comment comment,Member member) {
-		comment.setWriter(member.getId());
-		return dao.insertComment(comment);
+	public String insertComment(Comment comment,Member member) {
+		if(member!=null) {
+			comment.setWriter(member.getId());
+			return dao.insertComment(comment)+"";
+		}else {
+			return "로그인 세션이 만료되었습니다.";
+		}
 	}
 	
 	public int deleteComment(Comment comment) {

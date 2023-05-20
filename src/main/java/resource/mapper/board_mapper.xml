@@ -46,7 +46,7 @@ insert into BOARDCOMMENT values(comment_seq.nextval,#{postid},#{writer},#{commen
 delete BOARDCOMMENT where postid=#{postid} and id=#{id}
 </delete>
 
-<select id="selectComment" parameterType="java.lang.Integer">
+<select id="selectComment" parameterType="java.lang.Integer" resultType="comment">
 select * from BOARDCOMMENT where postid = #{postid} order by writedate
 </select>
 

@@ -17,7 +17,20 @@
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 
 <style>
-
+.comments .border-top{
+	padding-left:0.5rem;
+	padding-bottom: 0.8rem;
+}
+.commentinfo{
+	font-size:0.8rem;
+	color:gray;
+}
+.commentwriter,.badge{
+	cursor: pointer;
+}
+.commentdate{
+	text-align: right;
+}
 </style>
 
 </head>
@@ -37,23 +50,15 @@
 ${board.content }
 </div>
 
-<div class="comments">
 <h4>Comments</h4>
-	<div class="border-top">
-		<div class="row">
-			<div class="col">이름</div>
-			<div class="col-2">작성시일 <span class="badge bg-danger">삭제</span></div>
-		</div>
-		<div class="row">
-			<div class="col">작성내용</div>
-		</div>
-	</div>
+<div class="comments">
+	No comments for now.
 </div>
 	
 	<div class="border-top">
 		<div class="row">
 		<form class="needs-validation" id="commentForm">
-		<input type="hidden" name="postid" value="${board.postid }" required="required">
+			<input type="hidden" name="postid" value="${board.postid }" required="required">
 			<div class="col"><input class="form-control" name="comments" maxlength="999" disabled required="required"></div>
 			<div class="col-2"><button class="btn btn-primary text-center" id="commentsubmitbtn" disabled>submit</button></div>
 		</form>
@@ -112,8 +117,8 @@ fetch("${path}/selectRelative.do?postid=${board.postid }").then(response=>respon
 const logonid='${logon.id}'
 if(logonid=='${board.writer }'){
 	const badgeBoard = document.querySelector('.badgeBoard')
-	badgeBoard.insertAdjacentHTML('beforeend',`<span class="badge bg-warning" id='btnupdate' style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#updateModal">수정하기</span> `
-												+`<span class="badge bg-danger" id='btndelete' style="cursor: pointer">삭제하기</span>`);
+	badgeBoard.insertAdjacentHTML('beforeend',`<span class="badge bg-warning" id='btnupdate' data-bs-toggle="modal" data-bs-target="#updateModal">수정하기</span> `
+												+`<span class="badge bg-danger" id='btndelete'>삭제하기</span>`);
 	const btndelete = document.querySelector('#btndelete');
 	const btnupdate = document.querySelector('#btnupdate');
 	
@@ -124,31 +129,70 @@ if(logonid=='${board.writer }'){
 	})
 	
 }
+//덧글 읽기
+const loadComments = function(){
+	fetch("${path}/selectComment.do?postid=${board.postid }").then(response=>response.json())
+	.then(json=>{
+		const commentList = json.commentList;
+		var commentListHTML='';
+		commentList.forEach(function(each){
+			commentListHTML+=`<div class="border-top"><div class="row commentinfo"><div class="col commentwriter">`+each.writer+`</div><div class="col commentdate">`+each.writedate
+			if(logonid==each.writer){ commentListHTML+=` &nbsp;<span class="badge bg-danger commentDelBtn" onclick='commentDelete("`+each.id+`")'>삭제</span>` }
+			commentListHTML+=`</div></div><div class="row"><div class="col">`+each.comments+`</div></div></div>`
+		})
+		document.querySelector('.comments').innerHTML=commentListHTML;
+	}).catch(error=>{console.error(error)})
+}
 
-//덧글 불러오기
+//덧글삭제
+const commentDelete = function(id){
+	if(confirm('덧글을 삭제할까요?')){
+		fetch("${path}/deleteComment.do?id="+id+"&postid=${board.postid }").then(response=>response.text()).then(text=>{
+			if(text=='1'){
+				alert('삭제되었습니다.')
+			}else{
+				alert('삭제 결과를 확인하세요.')
+			}
+		}).catch(error=>{console.error(error)})
+		loadComments();
+	}
+}
+
+//덧글 쓰기
 const commentForm= document.querySelector('#commentForm')
 commentForm.addEventListener('submit', (e) => {
 	e.preventDefault();
 	const commentsubmitbtn = document.querySelector('#commentsubmitbtn')
-	var json= {"postid":$("[name=postid]").val(),"comments":$("[name=comments]").val()}
-	fetch('${path}/tempPassword.do', {
+	const json= {"postid":$("[name=postid]").val(),"comments":$("[name=comments]").val()}
+	console.log(json)
+	fetch('${path}/insertComment.do', {
     	  method: 'POST',
     	  body: JSON.stringify(json),
     	  headers: {
     	    'Content-Type': 'application/json'
     	  }
-	}).catch(error=>{console.error(error)})
+		}).then(response=>response.text()
+		).then(text=>{
+			if(text=='1'){
+				loadComments();
+				commentForm.reset();
+			}else if(text =='0'){
+				alert('덧글이 정상적으로 등록되지 않았습니다.');
+			}else{
+				alert(text);
+			}
+		  }
+		).catch(error=>{console.error(error)})
 	console.log(commentsubmitbtn)
 	
 })
-
-
 
 //로그인 했을때만 덧글 가능
 if(logonid!=''){
 	commentsubmitbtn.disabled=false;
 	document.querySelector('[name=comments]').disabled=false;
 }
+loadComments();
 </script>
 </body>
 

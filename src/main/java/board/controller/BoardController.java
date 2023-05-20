@@ -1,16 +1,18 @@
 package board.controller;
 
-import java.util.List;
+import java.io.IOException;
 
 import javax.servlet.http.HttpSession;
 
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -64,21 +66,38 @@ public class BoardController {
 		return "redirect:/selectBoardList.do";
 	}
 	
-
+	@ResponseBody
 	@RequestMapping("/insertComment.do")
-	public String insertComment(Comment comment,HttpSession session) {
-		return service.insertComment(comment,(Member)session.getAttribute("logon"))+"";
+	public String insertComment(@RequestBody String commentData,HttpSession session) {
+		 ObjectMapper mapper = new ObjectMapper();
+		 Comment comment= new Comment();
+		try {
+			comment = mapper.readValue(commentData, Comment.class);
+			System.out.println(comment.getComments());
+			System.out.println(comment.getPostid());
+			System.out.println((Member)session.getAttribute("logon"));
+			return service.insertComment(comment,(Member)session.getAttribute("logon"));
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "0";
 	}
 	
+	@ResponseBody
 	@RequestMapping("/deleteComment.do")
 	public String deleteComment(Comment comment) {
 		return service.deleteComment(comment)+"" ;
 	}
 	
+	@CrossOrigin(origins = "*",allowedHeaders = "*")
 	@RequestMapping("/selectComment.do")
 	public String selectComment(int postid,Model d){
 		d.addAttribute("commentList",service.selectComment(postid));
-		return "1";
+	return "pageJsonReport";
 	}
 	
 	//연관 게시글
