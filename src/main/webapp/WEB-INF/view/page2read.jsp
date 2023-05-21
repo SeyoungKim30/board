@@ -83,21 +83,6 @@ ${board.content }
 
 <%@include file="/resource/footer.jsp" %>
 
-<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-    <div class="modal-body">
-     		<h1>수정하기</h1>
-			<form action="${path }/updateBoard.do" class="needs-validation" enctype="multipart/form-data" method="post">
-			<input name="postid" class="form-control" value="${board.postid }" readonly="readonly">
-			<input name="subject" class="form-control" value="${board.subject }" required>
-			<textarea name="content" rows="" cols="" class="form-control" required>${board.content }</textarea>
-			<button class="btn btn-primary" type="submit">등록</button>
-			</form>
-	</div>
-    </div>
-  </div>
-</div>
 <script type="text/javascript" src="resource/js/comment.js" charset="utf-8"></script>
 <script>
 //연관글 비동기로 불러오기
@@ -118,7 +103,7 @@ fetch("${path}/selectRelative.do?postid=${board.postid }").then(response=>respon
 const logonid='${logon.id}'
 if(logonid=='${board.writer }'){
 	const badgeBoard = document.querySelector('.badgeBoard')
-	badgeBoard.insertAdjacentHTML('beforeend',`<span class="badge bg-warning" id='btnupdate' data-bs-toggle="modal" data-bs-target="#updateModal">수정하기</span> `
+	badgeBoard.insertAdjacentHTML('beforeend',`<span class="badge bg-warning" id='btnupdate' onclick="modify()">수정하기</span> `
 												+`<span class="badge bg-danger" id='btndelete'>삭제하기</span>`);
 	const btndelete = document.querySelector('#btndelete');
 	const btnupdate = document.querySelector('#btnupdate');
@@ -128,8 +113,13 @@ if(logonid=='${board.writer }'){
 			location.href='${path}/deleteBoard.do?postid=${board.postid}';
 		}
 	})
-	
 }
+
+//수정
+function modify(){
+	location.href="${path}/updateBoard.do?postid="+${board.postid };
+}
+
 
 //덧글 쓰기
 const commentForm= document.querySelector('#commentForm')
