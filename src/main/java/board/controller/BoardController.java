@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -45,7 +47,7 @@ public class BoardController {
 	
 	//게시글 조회
 	@RequestMapping("/selectBoard.do")
-	public String selectBoard(@ModelAttribute("search") BoardSch search,Board board,Model d) {
+	public String selectBoard(@ModelAttribute("search") BoardSch search, Board board,Model d) {
 		d.addAttribute("boardList",service.selectBoardList(search));	//글쓴이랑 글 제목으로 검색
 		board = service.selectBoard(board);	//글 넘버로 검색
 		d.addAttribute("board",board);
@@ -53,7 +55,15 @@ public class BoardController {
 	}
 	
 	//게시글 수정
-	@RequestMapping("/updateBoard.do")
+	@GetMapping("/updateBoard.do")
+	public String updateBoardView(Board board,Model d) {
+		board = service.selectBoard(board);	//글 넘버로 검색
+		d.addAttribute("board",board);
+		return "page4modify";
+	}
+	
+	//게시글 수정
+	@PostMapping("/updateBoard.do")
 	public String updateBoard(Board board) {
 		service.updateBoard(board);
 		return "redirect:/selectBoard.do?postid="+board.getPostid();
