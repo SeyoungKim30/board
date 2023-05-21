@@ -98,6 +98,7 @@ ${board.content }
     </div>
   </div>
 </div>
+<script type="text/javascript" src="resource/js/comment.js" charset="utf-8"></script>
 <script>
 //연관글 비동기로 불러오기
 const relativePostlist = document.querySelector('#relativePostlist')
@@ -129,62 +130,12 @@ if(logonid=='${board.writer }'){
 	})
 	
 }
-//덧글 읽기
-const loadComments = function(){
-	fetch("${path}/selectComment.do?postid=${board.postid }").then(response=>response.json())
-	.then(json=>{
-		const commentList = json.commentList;
-		var commentListHTML='';
-		commentList.forEach(function(each){
-			commentListHTML+=`<div class="border-top"><div class="row commentinfo"><div class="col commentwriter">`+each.writer+`</div><div class="col commentdate">`+each.writedate
-			if(logonid==each.writer){ commentListHTML+=` &nbsp;<span class="badge bg-danger commentDelBtn" onclick='commentDelete("`+each.id+`")'>삭제</span>` }
-			commentListHTML+=`</div></div><div class="row"><div class="col">`+each.comments+`</div></div></div>`
-		})
-		document.querySelector('.comments').innerHTML=commentListHTML;
-	}).catch(error=>{console.error(error)})
-}
-
-//덧글삭제
-const commentDelete = function(id){
-	if(confirm('덧글을 삭제할까요?')){
-		fetch("${path}/deleteComment.do?id="+id+"&postid=${board.postid }").then(response=>response.text()).then(text=>{
-			if(text=='1'){
-				alert('삭제되었습니다.')
-			}else{
-				alert('삭제 결과를 확인하세요.')
-			}
-		}).catch(error=>{console.error(error)})
-		loadComments();
-	}
-}
 
 //덧글 쓰기
 const commentForm= document.querySelector('#commentForm')
 commentForm.addEventListener('submit', (e) => {
 	e.preventDefault();
-	const commentsubmitbtn = document.querySelector('#commentsubmitbtn')
-	const json= {"postid":$("[name=postid]").val(),"comments":$("[name=comments]").val()}
-	console.log(json)
-	fetch('${path}/insertComment.do', {
-    	  method: 'POST',
-    	  body: JSON.stringify(json),
-    	  headers: {
-    	    'Content-Type': 'application/json'
-    	  }
-		}).then(response=>response.text()
-		).then(text=>{
-			if(text=='1'){
-				loadComments();
-				commentForm.reset();
-			}else if(text =='0'){
-				alert('덧글이 정상적으로 등록되지 않았습니다.');
-			}else{
-				alert(text);
-			}
-		  }
-		).catch(error=>{console.error(error)})
-	console.log(commentsubmitbtn)
-	
+	writeComment(${board.postid});
 })
 
 //로그인 했을때만 덧글 가능
@@ -192,8 +143,10 @@ if(logonid!=''){
 	commentsubmitbtn.disabled=false;
 	document.querySelector('[name=comments]').disabled=false;
 }
-loadComments();
+loadComments(${board.postid });
+
 </script>
+
 </body>
 
 

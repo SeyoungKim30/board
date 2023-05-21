@@ -58,3 +58,4 @@ CREATE TABLE boardfile(
 	);
 	
 SELECT * FROM boardfile;
+
