@@ -28,8 +28,6 @@ public interface BoardDao {
 	
 	public int insertVoca(Voca voca);
 	public List<Board> selectRelative(int postid);
-	
-	public int insertFile(BoardFile boardFile);
-	
+
 
 }

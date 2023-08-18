@@ -1,4 +1,4 @@
-package board.service;
+package board;
 
 import java.util.ArrayList;
 import java.util.List;

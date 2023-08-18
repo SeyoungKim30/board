@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >	
+<mapper namespace="board.dao.FileDao">
+
+<insert id="insertFile" parameterType="boardFile">
+	insert into boardfile values (#{postid}, #{fileid},#{filename})
+</insert>
+
+<select id="selectFile" parameterType="java.lang.Integer" resultType="boardFile">
+	select * from boardfile where postid = #{postid}
+</select>
+
+</mapper>		

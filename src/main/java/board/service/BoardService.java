@@ -1,23 +1,19 @@
 package board.service;
 
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
+import board.Komo;
 import board.dao.BoardDao;
 import board.vo.Board;
-import board.vo.BoardFile;
 import board.vo.BoardSch;
 import board.vo.Comment;
 import board.vo.Member;
 import board.vo.Voca;
-
 
 @Service
 public class BoardService {
@@ -28,8 +24,9 @@ public class BoardService {
 	@Autowired
 	Komo komo;
 	
-	@Value("${file.path}")
-	String filepath;
+	@Autowired
+	FileService fileService;
+	
 
 	public List<Board> selectBoardList(BoardSch search){
 		//search 세팅 : 페이지관련
@@ -47,7 +44,7 @@ public class BoardService {
 		dao.insertBoard(board);
 		//파일첨부
 		if(board.getFilelist()!=null) {
-			fileLoad(board);
+			fileService.fileLoad(board);
 		}
 		Voca voca= new Voca(board.getPostid(), komo.analyzingList(board.getContent()+board.getSubject()));
 		dao.insertVoca(voca);
@@ -65,6 +62,7 @@ public class BoardService {
 		
 		Voca voca= new Voca(board.getPostid(), komo.analyzingList(board.getContent()+board.getSubject()));
 		dao.insertVoca(voca);
+	//파일추가할때 기존파일 냅두고 새 파일추가하거나, 기존파일 삭제하는 기능 필요
 	}
 	
 	public void deleteBoard(Board board) {
@@ -94,25 +92,4 @@ public class BoardService {
 		return dao.selectRelative(postid);
 	}
 	
-	public void fileLoad(Board board) {
-		int filenumber=0;
-		BoardFile boardFile = new BoardFile();
-		boardFile.setPostid(board.getPostid());
-		for(MultipartFile each:board.getFilelist()) {
-			if(each.getSize()<10485760) {
-				filenumber++;
-				String fileName = board.getPostid()+"_"+filenumber+each.getOriginalFilename().substring(each.getOriginalFilename().lastIndexOf("."));
-				boardFile.setFileid(filenumber);
-				boardFile.setFilename(fileName);
-				File file = new File(filepath+fileName);
-				try {
-					each.transferTo(file);	//파일 저장
-					dao.insertFile(boardFile);
-				} catch (IllegalStateException | IOException e) {
-					e.printStackTrace();
-				}
-			}
-			
-		}
-	}
 }

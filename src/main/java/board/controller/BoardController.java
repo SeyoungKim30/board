@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import board.service.BoardService;
+import board.service.FileService;
 import board.vo.Board;
 import board.vo.BoardSch;
 import board.vo.Comment;
@@ -30,6 +31,9 @@ public class BoardController {
 
 	@Autowired
 	BoardService service;
+	
+	@Autowired
+	FileService fileService;
 	
 	//게시글 목록
 	@RequestMapping("/selectBoardList.do")
@@ -51,6 +55,7 @@ public class BoardController {
 		d.addAttribute("boardList",service.selectBoardList(search));	//글쓴이랑 글 제목으로 검색
 		board = service.selectBoard(board);	//글 넘버로 검색
 		d.addAttribute("board",board);
+		d.addAttribute("boardFileList", fileService.selectFile(board.getPostid()));
 		return "page2read";	
 	}
 	
@@ -59,6 +64,7 @@ public class BoardController {
 	public String updateBoardView(Board board,Model d) {
 		board = service.selectBoard(board);	//글 넘버로 검색
 		d.addAttribute("board",board);
+		d.addAttribute("boardFileList", fileService.selectFile(board.getPostid()));
 		return "page4modify";
 	}
 	

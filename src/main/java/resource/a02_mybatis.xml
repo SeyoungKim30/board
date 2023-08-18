@@ -13,5 +13,6 @@
 	<mappers>
 		<mapper resource="resource/mapper/board_mapper.xml"/>
 		<mapper resource="resource/mapper/member_mapper.xml"/>
+		<mapper resource="resource/mapper/file_mapper.xml"/>
 	</mappers>
 </configuration>

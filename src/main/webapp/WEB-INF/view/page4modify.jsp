@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>글쓰기</title>
+<title>글 수정하기</title>
 
 <script type="text/javascript" src="resource/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 </head>
@@ -17,7 +17,7 @@
 
 <%@include file="/resource/header.jsp" %>
 <main class="container-xl">
-	<h1>글쓰기</h1>
+	<h1>글 수정하기</h1>
 		<form action="${path }/updateBoard.do" class="needs-validation" enctype="multipart/form-data" method="post" id="writeform">
 			
 			<input name="postid" class="form-control" value="${board.postid }" readonly="readonly">
@@ -27,7 +27,11 @@
 			
 			<textarea name="content" id="ir1" rows="20" cols="" class="form-control">${board.content }</textarea>
 			
-			<p class="attachmentFile"></p>
+				<div class="attachmentFile border-top p-2">
+					<c:forEach items="${boardFileList}" var="each">
+					<div class="form-control"> ${each.filename } <span class="badge text-bg-danger" id="${each.fileid }">X</span></div>
+					</c:forEach>
+				</div>
 			<button type="button" class="btn btn-secondary" id="morefileBtn">파일추가</button>
 			
 			<button class="btn btn-primary" type="submit" id="submitbtn">등록</button>

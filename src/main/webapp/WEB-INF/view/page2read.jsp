@@ -48,8 +48,13 @@
 </div>
 <div class="pt-3 pb-5 ">
 ${board.content }
+	<div class="attachmentFile border-top pt-2">
+		<c:forEach items="${boardFileList}" var="each">
+		<input type="button" name="filelist" class="btn btn-outline-primary" readonly="readonly" value="${each.filename }">
+		</c:forEach>
+	</div>
 </div>
-
+			
 <h4>Comments</h4>
 <div class="comments">
 	No comments for now.
