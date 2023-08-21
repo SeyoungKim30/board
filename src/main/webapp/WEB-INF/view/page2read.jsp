@@ -50,7 +50,7 @@
 ${board.content }
 	<div class="attachmentFile border-top pt-2">
 		<c:forEach items="${boardFileList}" var="each">
-		<input type="button" name="filelist" class="btn btn-outline-primary" readonly="readonly" value="${each.filename }">
+		<input type="button" name="filelist" class="btn btn-outline-primary download" readonly="readonly" value="${each.filename }">
 		</c:forEach>
 	</div>
 </div>
@@ -140,6 +140,17 @@ if(logonid!=''){
 }
 loadComments(${board.postid });
 
+//파일 다운로드 download 클래스에 적용
+function downloadFile(downloadFileName){
+	location.href="${path}/download.do?downloadFileName="+downloadFileName;
+}
+const downloadclass = document.querySelectorAll(".download");
+for(var btn of downloadclass){
+	btn.addEventListener('click',(e)=>{
+		let downloadFileName = e.target.value;
+		downloadFile(downloadFileName);
+	})
+}
 </script>
 
 </body>
