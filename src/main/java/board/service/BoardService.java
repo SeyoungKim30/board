@@ -42,12 +42,12 @@ public class BoardService {
 	
 	public Board insertBoard(Board board) {
 		dao.insertBoard(board);
-		//파일첨부
-		if(board.getFilelist()!=null) {
-			fileService.fileLoad(board);
-		}
 		Voca voca= new Voca(board.getPostid(), komo.analyzingList(board.getContent()+board.getSubject()));
 		dao.insertVoca(voca);
+		//파일첨부
+		if(board.getFilelist()!=null) {
+			fileService.fileUpload(board);
+			}
 		return board;
 	}
 	
@@ -62,7 +62,10 @@ public class BoardService {
 		
 		Voca voca= new Voca(board.getPostid(), komo.analyzingList(board.getContent()+board.getSubject()));
 		dao.insertVoca(voca);
-	//파일추가할때 기존파일 냅두고 새 파일추가하거나, 기존파일 삭제하는 기능 필요
+		//기존 파일은 file로 input에 인식 안되니까 새로 등록된 파일들만 업로드하면 됨
+		if(board.getFilelist()!=null) {
+			fileService.fileUpload(board);
+		}
 	}
 	
 	public void deleteBoard(Board board) {

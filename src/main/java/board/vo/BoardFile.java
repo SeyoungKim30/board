@@ -2,7 +2,6 @@ package board.vo;
 
 public class BoardFile {
 	int postid;
-	int fileid;
 	String filename;
 	
 	public BoardFile() {
@@ -12,7 +11,6 @@ public class BoardFile {
 	public BoardFile(int postid, int fileid, String filename) {
 		super();
 		this.postid = postid;
-		this.fileid = fileid;
 		this.filename = filename;
 	}
 	public int getPostid() {
@@ -21,12 +19,7 @@ public class BoardFile {
 	public void setPostid(int postid) {
 		this.postid = postid;
 	}
-	public int getFileid() {
-		return fileid;
-	}
-	public void setFileid(int fileid) {
-		this.fileid = fileid;
-	}
+	
 	public String getFilename() {
 		return filename;
 	}

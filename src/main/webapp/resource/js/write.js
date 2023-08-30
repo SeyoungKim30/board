@@ -1,4 +1,30 @@
+	
+//파일 리스트 추가	
+const morefileBtn = document.querySelector("#morefileBtn");
+const attachmentFile = document.querySelector('.attachmentFile');
 
+let canclebtn=0;
+	morefileBtn.addEventListener('click',function(){
+		canclebtn++;
+		attachmentFile.insertAdjacentHTML("beforeend",`<div class="input-group mb-1" id="file`+canclebtn+`"><input type="file" class="form-control" name ="filelist" onchange="uploadFile(this)">
+										<button class="btn btn-warning" type="button" id="`+canclebtn+`">취소</button>
+										</div>`)
+		
+		//파일 취소 버튼
+		var filecancleBtn=document.querySelectorAll(".attachmentFile .btn-warning")
+		filecancleBtn.forEach(function(each){
+			each.addEventListener('click',function(){
+				document.querySelector("#file"+each.id).remove();
+				})
+			})
+	})
+//파일 선택하고 파일 크기 구함
+function uploadFile(newfile){
+	if(newfile.files[0].size > 10485760){
+		alert("10MB 이상의 파일은 첨부할 수 없습니다.")
+		document.querySelector("#file"+canclebtn).remove();
+	}
+}
 
 //바이트 수 구하는 함수
 function getByteSize(str) {
@@ -51,5 +77,8 @@ writeform.addEventListener('submit',function(e){
 		alert('글자수를 초과했습니다.')
 		return;
 	}
+	
+	//파일 용량 검사
+	
 	if(valid) writeform.submit();
 })

@@ -59,7 +59,7 @@ public class BoardController {
 		return "page2read";	
 	}
 	
-	//게시글 수정
+	//게시글 수정 페이지
 	@GetMapping("/updateBoard.do")
 	public String updateBoardView(Board board,Model d) {
 		board = service.selectBoard(board);	//글 넘버로 검색
@@ -68,7 +68,7 @@ public class BoardController {
 		return "page4modify";
 	}
 	
-	//게시글 수정
+	//게시글 수정 등록 
 	@PostMapping("/updateBoard.do")
 	public String updateBoard(Board board) {
 		service.updateBoard(board);

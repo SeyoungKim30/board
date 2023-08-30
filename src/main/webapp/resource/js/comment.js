@@ -2,6 +2,22 @@
  * 코멘트 읽기, 쓰기, 삭제 기능
  */
 
+
+
+//연관글 비동기로 불러오기
+const loadrelative = function(postid){
+	const relativePostlist = document.querySelector('#relativePostlist')
+	fetch("selectRelative.do?postid="+postid).then(response=>response.json())
+	.then(json=>{
+		const postsArr= json.relativePosts;
+		var newlists='';
+		postsArr.forEach(function(each){
+			newlists+='<li><a href="${path}/selectBoard.do?postid='+each.postid+'">'+each.subject+'</a></li>'
+		})
+		relativePostlist.innerHTML = newlists;
+	}).catch(error=>{console.error(error)})
+
+}
  //덧글 읽기 함수
 const loadComments = function(postid){
 	fetch("selectComment.do?postid="+postid).then(response=>response.json())

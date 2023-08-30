@@ -90,18 +90,8 @@ ${board.content }
 
 <script type="text/javascript" src="resource/js/comment.js" charset="utf-8"></script>
 <script>
-//연관글 비동기로 불러오기
-const relativePostlist = document.querySelector('#relativePostlist')
-
-fetch("${path}/selectRelative.do?postid=${board.postid }").then(response=>response.json())
-.then(json=>{
-	const postsArr= json.relativePosts;
-	let newlists='';
-	postsArr.forEach(function(each){
-		newlists+='<li><a href="${path}/selectBoard.do?postid='+each.postid+'">'+each.subject+'</a></li>'
-	})
-	relativePostlist.innerHTML = newlists;
-}).catch(error=>{console.error(error)})
+loadComments(${board.postid });
+loadrelative(${board.postid });
 
 
 //작성자만 삭제 가능
@@ -138,7 +128,6 @@ if(logonid!=''){
 	commentsubmitbtn.disabled=false;
 	document.querySelector('[name=comments]').disabled=false;
 }
-loadComments(${board.postid });
 
 //파일 다운로드 download 클래스에 적용
 function downloadFile(downloadFileName){

@@ -35,12 +35,6 @@
 <%@include file="/resource/footer.jsp" %>		
 </body>
 <script type="text/javascript" src="resource/js/write.js" charset="utf-8"></script>
-<script type="text/javascript">
-const morefileBtn = document.querySelector("#morefileBtn");
-morefileBtn.addEventListener('click',function(){
-	$('.attachmentFile').append('<input type="file" name="filelist" class="form-control">')
-})
-</script>
 
 
 </html>

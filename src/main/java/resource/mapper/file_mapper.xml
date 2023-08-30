@@ -5,11 +5,16 @@
 <mapper namespace="board.dao.FileDao">
 
 <insert id="insertFile" parameterType="boardFile">
-	insert into boardfile values (#{postid}, #{fileid},#{filename})
+	insert into boardfile values (#{postid},#{filename})
 </insert>
+
+<delete id="deleteFile" parameterType="boardFile">
+	DELETE FROM boardfile WHERE POSTID =#{postid} AND filename = #{filename}
+</delete>
 
 <select id="selectFile" parameterType="java.lang.Integer" resultType="boardFile">
 	select * from boardfile where postid = #{postid}
 </select>
+
 
 </mapper>		
