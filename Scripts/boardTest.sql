@@ -58,3 +58,5 @@ WHERE b.POSTID = sub3.postid AND countvoca>=2
 ORDER BY sumFREQUENCY desc;
 
 SELECT * FROM boardvoca WHERE postid=233;
+
+SELECT * FROM BOARDFILE b ;
