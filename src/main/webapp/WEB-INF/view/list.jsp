@@ -9,22 +9,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<style>
-.titlelistrow{
-	border-bottom-color: lightgray;
-	border-bottom-style: solid;
-	border-bottom-width: thin;
-}
 
-a:link{
-	text-decoration: none;
-	}
-</style>
 </head>
 <body>
 
 <article class="col">
-<div class="row"><div class="col-2 text-bg-primary p-3 text-center">날짜</div><div class="col text-bg-primary p-3">제목</div></div>
+<div class="row titlelisthead"><div class="col-2 p-3 text-center"><span>날짜</span></div><div class="col p-3"><span>제목</span></div></div>
 <c:forEach items="${boardList}" var="each" >
 	<div class="row p-1 titlelistrow">
 	<div class="col-2 text-center">${fn:substring(each.regdte,0,10) }</div>

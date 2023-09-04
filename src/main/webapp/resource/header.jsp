@@ -13,42 +13,21 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<link href="${path}/resource/precrackedegg.css" rel="stylesheet">
 
-
-<style>
-header{
-	text-align: center;
-	background-color: darkblue;
-	height: 70px;
-	}
-header h1 a{
-	all: unset;
-	cursor: pointer;
-	font-size:2rem;
-	font-weight: bold;
-	color:ivory;
-	}
-
-article{
-	width: 80%;
-  	min-width:300px;
-  	padding: 15px;
-  	margin: 0 auto;
-  	}
-  	
-h1,h2,h3,h4,h5,h6{ font-weight: bold;}
-</style>
 </head>
 <body>
 
-<header class="navbar navbar-expand-lg bd-navbar sticky-top">
-<nav class="container-xxl bd-gutter flex-wrap flex-lg-nowrap">
-	<h1><a href="selectBoardList.do">연관게시물 제공하는 게시판</a></h1>
-	<div class="d-flex">
-		<button type="button" class="btn btn-primary m-1" id="writebtn">글쓰기</button>
-		<button class="btn btn-light m-1" id="loginbtn">로그인</button>
+<header class="sticky-top">
+<div class="whiteshell">
+<nav class="container flex-nowrap flex-lg-nowrap navbar">
+	<h1><a href="selectBoardList.do"><span style="color:#42caff;">Pre-Cracked</span> <span style="color:yellow;font-size:3rem;">egg</span></a></h1>
+	<div class="d-flex align-items-center">
+		<div class="m-1"><button type="button" class="row align-items-end " id="writebtn"><div class="col">글쓰기</div></button></div>
+		<div class="m-1"><button class="btn btn-eggred" id="loginbtn">Log In</button></div>
 	</div>
 	</nav>
+</div>
 </header>
 
 <script>
