@@ -17,5 +17,28 @@ insert into boardmember values (#{id}, #{password}, #{username},0)
 select count(id) from boardmember where id= #{id}
 </select>
 
+
+<select id="selectBoardListByWriter" parameterType="boardSch" resultType="board">
+
+SELECT b3.postid, b3.subject, b3.regdte, b3.rn from 
+(SELECT b2.* , rownum rn from
+(select b.* from board b 
+	WHERE subject LIKE '%'||#{searchSubject, jdbcType=VARCHAR}||'%' AND writer = #{searchWriter, jdbcType=VARCHAR}
+	order by regdte DESC) b2 ) b3
+WHERE rn BETWEEN  1+(#{howmanyInonepage}*(#{pageIndex}-1)) and (#{howmanyInonepage}*#{pageIndex})
+order by rn
+</select>
+
+
+<select id="selectCommentListByWriter" parameterType="boardSch" resultType="comment">
+SELECT c3.* FROM
+(SELECT c2.*, rownum rn from
+(select c.* from BOARDCOMMENT c 
+	WHERE comments LIKE '%'||#{searchSubject, jdbcType=VARCHAR}||'%' AND writer = #{searchWriter, jdbcType=VARCHAR}
+order by WRITEDATE DESC ) c2) c3
+WHERE rn BETWEEN 1+( #{howmanyInonepage} * ( #{pageIndex}-1 ) ) and ( #{howmanyInonepage} * #{pageIndex} )
+order by rn
+</select>
+
 </mapper>		
 		

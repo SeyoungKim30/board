@@ -59,3 +59,4 @@ CREATE TABLE boardfile(
 	
 SELECT * FROM boardfile;
 SELECT * FROM BOARDMEMBER b ;
+

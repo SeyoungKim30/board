@@ -23,6 +23,7 @@
 <nav class="container flex-nowrap flex-lg-nowrap navbar">
 	<h1><a href="selectBoardList.do"><span style="color:#42caff;">Pre-Cracked</span> <span style="color:yellow;font-size:3rem;">egg</span></a></h1>
 	<div class="d-flex align-items-center">
+		<div class="m-1"><a href="${path}/myaccount.do">my account</a></div>
 		<div class="m-1"><button type="button" class="row align-items-end " id="writebtn"><div class="col">글쓰기</div></button></div>
 		<div class="m-1"><button class="btn btn-eggred" id="loginbtn">Log In</button></div>
 	</div>
